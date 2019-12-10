@@ -23,6 +23,7 @@ router.get('/is-logged-in', (req, res, next) => {
 
 
 router.post('/login', passport.authenticate('local'), (req, res, next) => {
+  console.log('heres the route')
   const { user } = req;
   res.status(200).json(user);
 });
