@@ -37,8 +37,31 @@ router.get('/flight-search', (req, res, next)=>{
     console.log(airportData)
     res.json(airportData)
   })
-}
-)
+})
+
+
+router.post('/add-flight/:id', (req, res, next)=>{
+
+  let id = req.params.id  
+  // var flights = req.body.flights
+
+  User.findByIdAndUpdate(id, req.body)
+  .then(data => {
+    res.json(data)
+  })
+  .catch(err => {
+    console.log(err)
+  })
+
+
+})
+
+// router.put('/add-flight', (req, res, next) => {
+
+//   let {}
+
+// })
+
   
 
 module.exports = router;

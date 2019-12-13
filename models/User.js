@@ -9,6 +9,7 @@ const userSchema = new Schema(
     username: String,
     profileImg: {type: String, default:"/images/profile-icon-9.png"},
     trips: [{type: Schema.Types.ObjectId, ref: "Trip"}],
+    flights: [],
     admin: {type: Boolean, default: false}
   },
   {
