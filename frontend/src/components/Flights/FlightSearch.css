@@ -1,0 +1,86 @@
+.flightSearchPage {
+    width: 100vw;
+    display: flex;
+}
+
+.flightSearch {
+    display: flex; 
+    flex-direction: column;
+    width: 35vw;
+
+}
+
+.mapDiv {
+    width: 65vw;
+    height: 90vh;
+    position: absolute;
+    right: 0;
+}
+
+.showFlights {
+    width: 30vw; 
+    overflow: scroll;
+    height: 80vh;
+    margin: 20px;
+
+}
+
+.loader {
+    position: absolute;
+    top: 40vh;
+    right: 40vw;
+}
+
+.searchForm {
+    width: 33vw;
+    display: flex;
+    margin: 10px
+}
+
+.searchBar {
+    width: 80%;
+}
+
+.searchBttn {
+    width: 20%; 
+}
+
+.flightDetails {
+    list-style-type: none;
+}
+
+.flightLocation > h3 {
+    font-size: 20px;
+    color: coral;
+}
+
+.flightDate {
+
+    width: 30vw;
+    display: flex; 
+    margin-left: 30px;
+}
+
+.date {
+  width: 30vw;
+ 
+}
+
+.date > p {
+    font-size: 16px;
+}
+
+.date > p > strong {
+    font-size: 18px;
+    color: blue;
+}
+
+
+.flightPrice > h4 {
+    font-size: 20px;
+    color: coral;
+}
+.flightPrice {
+    display: flex;
+    margin-left: 30px;
+}

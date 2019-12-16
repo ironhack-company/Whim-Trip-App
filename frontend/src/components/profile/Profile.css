@@ -1,0 +1,20 @@
+.profilePage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.userProfile {
+    display: flex; 
+    background-color: coral;
+    width: 70vw;
+}
+
+
+.profilePic {
+    width: 200px;
+    height:200px;
+    border: 2px solid black;
+    border-radius: 50%;
+}
