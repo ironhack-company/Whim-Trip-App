@@ -33,7 +33,7 @@ export class FlightSearch extends Component {
   componentDidMount() {
     console.log("Components!");
     // console.log(this.props)
-    axios.get("http://localhost:5000/flight-search").then(data =>
+    axios.get("http://whim-travel.co/flight-search").then(data =>
       this.setState({
         airports: data.data
       })
@@ -111,7 +111,7 @@ export class FlightSearch extends Component {
       () => {
         console.log(this.state.user);
         axios
-          .post(`http://localhost:5000/add-flight/${copyUser._id}`, {
+          .post(`http://whim-travel.co/add-flight/${copyUser._id}`, {
             flights: this.state.user.flights
           })
           .then(data => {

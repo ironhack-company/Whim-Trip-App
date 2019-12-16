@@ -38,7 +38,7 @@ export default class PassengerDetailForm extends Component {
       () => {
         console.log(this.state.user);
         axios
-          .post(`http://localhost:5000/add-flight/${copyUser._id}`, {
+          .post(`http://whim-travel.co/add-flight/${copyUser._id}`, {
             flights: this.state.user.flights
           })
           .then(data => {
