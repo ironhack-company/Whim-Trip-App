@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "preinstall": "echo --- preinstall --- && npm install && cd ../frontend && npm install && npm run build && cd ..",
     "start": "node ./bin/www",
     "dev": "DEBUG=backend:* nodemon ./bin/www",
     "dev-windows": "nodemon ./bin/www"
