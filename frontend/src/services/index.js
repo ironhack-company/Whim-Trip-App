@@ -2,9 +2,9 @@ import axios from 'axios';
 let baseURL;
 
 process.env.NODE_ENV === 'production'
-  ? (baseURL = 'https://travapppa.herokuapp.com')
+  ? (baseURL = 'https://whim-travel.co')
   : (baseURL = 'http://localhost:5000');
-
+ 
 const service = axios.create({ withCredentials: true, baseURL });
 
 const actions = {
