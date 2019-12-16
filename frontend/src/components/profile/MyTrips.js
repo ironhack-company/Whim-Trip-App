@@ -8,7 +8,7 @@ export default class MyTrips extends Component {
         location: null
     }
     componentDidMount(){
-        axios.get(`http://whim-travel.co/{this.props.location.pathname}`)
+        axios.get(`http://localhost:5000${this.props.location.pathname}`)
         .then(data => {
             console.log(data)
             this.setState({

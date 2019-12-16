@@ -1,27 +1,29 @@
 .flightSearchPage {
-    width: 100vw;
+    width: 100%;
     display: flex;
 }
 
 .flightSearch {
     display: flex; 
     flex-direction: column;
-    width: 35vw;
+    width: 35%;
 
 }
 
 .mapDiv {
-    width: 65vw;
-    height: 90vh;
+    width: 41%;
+    height: 90%;
     position: absolute;
     right: 0;
+    margin-right: 104px;
+    margin-top: 3.9%;
 }
 
 .showFlights {
-    width: 30vw; 
+    width: 55%;
     overflow: scroll;
-    height: 80vh;
-    margin: 20px;
+    height: 80vw;
+
 
 }
 
@@ -32,9 +34,10 @@
 }
 
 .searchForm {
-    width: 33vw;
+    width: 40%;
     display: flex;
-    margin: 10px
+    margin: 10px;
+    margin-left: 111px;
 }
 
 .searchBar {
@@ -56,13 +59,13 @@
 
 .flightDate {
 
-    width: 30vw;
+    width: 30%;
     display: flex; 
     margin-left: 30px;
 }
 
 .date {
-  width: 30vw;
+  width: 30%;
  
 }
 

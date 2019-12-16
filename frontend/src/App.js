@@ -14,6 +14,7 @@ import FlightSearch from "./components/Flights/FlightSearch";
 import CheapFlights from "./components/Flights/CheapFlights";
 import HotelSearch from "./components/Hotels/HotelSearch";
 import CheckPrices from "./components/Flights/CheckPrices";
+import PassengerDetailForm from "./components/Flights/PassengerDetailForm";
 
 class App extends Component {
   state = {};
@@ -76,7 +77,10 @@ class App extends Component {
                     Logged in as {this.state.username}
                   </NavItem>
                   <NavLink className="mr-2 text-dark" to="/flight-search">
-                    Flight
+                    Flight inspiration
+                  </NavLink>
+                  <NavLink className="mr-2 text-dark" to="/cheap-flights">
+                    Search flights
                   </NavLink>
                   <NavLink className="mr-2 text-dark" to="/hotel-search">
                     Hotels
@@ -111,7 +115,7 @@ class App extends Component {
             path="/"
             render={props => <Home {...props} setUser={this.setUser} />}
           />
-            <Route
+          <Route
             exact
             path="/cheap-flights"
             render={props => <CheapFlights {...props} setUser={this.setUser} />}
@@ -127,6 +131,7 @@ class App extends Component {
             render={props => (
               <FlightSearch
                 {...props}
+                user={this.state}
                 setUser={this.setUser}
                 headers={this.state.headers}
               />
@@ -156,6 +161,18 @@ class App extends Component {
             exact
             path="/check-prices"
             component={CheckPrices}
+            render={props => (
+              <CheckPrices
+                {...props}
+                user={this.state}
+                headers={this.state.headers}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/passenger-details"
+            component={PassengerDetailForm}
             render={props => (
               <CheckPrices
                 {...props}

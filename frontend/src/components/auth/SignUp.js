@@ -38,7 +38,7 @@ class SignUp extends Component {
 
 
           <Form.Group as={Col} md="12" >
-            <p>Hellllllllooooo:</p>
+            <p>Name:</p>
 
             <Form.Row>
 
