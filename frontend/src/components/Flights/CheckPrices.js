@@ -57,10 +57,59 @@ export default class CheckPrices extends Component {
         console.log(flight);
         let outboundFlight = flight.offerItems[0].services[0];
         let returnFlight = flight.offerItems[0].services[1];
+        let firstRender = null;
+        let secondRender = null;
+
+        if (outboundFlight.segments.length > 1) {
+          firstRender = (
+            <>
+              <li>
+                From
+                {outboundFlight.segments[1].flightSegment.departure.iataCode}
+              </li>
+              <li>
+                To
+                {outboundFlight.segments[1].flightSegment.arrival.iataCode}
+              </li>
+              <li>
+                Carrier
+                {outboundFlight.segments[1].flightSegment.operating.carrierCode}
+              </li>
+              <li>
+                Duration
+                {outboundFlight.segments[1].flightSegment.duration}
+              </li>
+            </>
+          );
+        }
+        if (returnFlight.segments.length > 1) {
+          secondRender = (
+            <>
+              <li>
+                From
+                {returnFlight.segments[1].flightSegment.departure.iataCode}
+              </li>
+              <li>
+                To
+                {returnFlight.segments[1].flightSegment.arrival.iataCode}
+              </li>
+              <li>
+                Carrier
+                {returnFlight.segments[1].flightSegment.operating.carrierCode}
+              </li>
+              <li>
+                Duration
+                {returnFlight.segments[1].flightSegment.duration}
+              </li>
+            </>
+          );
+        }
         return (
           <ul key={i}>
             <div>
               <div className="outbound-container">
+                <li>Price {flight.offerItems[0].price.total} </li>
+                <li>Tax {flight.offerItems[0].price.totalTaxes} </li>
                 <li>
                   From
                   {outboundFlight.segments[0].flightSegment.departure.iataCode}
@@ -80,25 +129,7 @@ export default class CheckPrices extends Component {
                   Duration
                   {outboundFlight.segments[0].flightSegment.duration}
                 </li>
-                <li>
-                  From
-                  {outboundFlight.segments[1].flightSegment.departure.iataCode}
-                </li>
-                <li>
-                  To
-                  {outboundFlight.segments[1].flightSegment.arrival.iataCode}
-                </li>
-                <li>
-                  Carrier
-                  {
-                    outboundFlight.segments[1].flightSegment.operating
-                      .carrierCode
-                  }
-                </li>
-                <li>
-                  Duration
-                  {outboundFlight.segments[1].flightSegment.duration}
-                </li>
+                {firstRender}
               </div>
               <div>
                 <li>
@@ -133,23 +164,11 @@ export default class CheckPrices extends Component {
                   Duration
                   {returnFlight.segments[0].flightSegment.duration}
                 </li>
-                <li>
-                  From
-                  {returnFlight.segments[1].flightSegment.departure.iataCode}
-                </li>
-                <li>
-                  To
-                  {returnFlight.segments[1].flightSegment.arrival.iataCode}
-                </li>
-                <li>
-                  Carrier
-                  {returnFlight.segments[1].flightSegment.operating.carrierCode}
-                </li>
-                <li>
-                  Duration
-                  {returnFlight.segments[1].flightSegment.duration}
-                </li>
-                <li>Price {flight.offerItems[0].price.total} </li>
+                {console.log(
+                  returnFlight.segments,
+                  returnFlight.segments.length
+                )}
+                {secondRender}
               </div>
             </div>
             <button>
