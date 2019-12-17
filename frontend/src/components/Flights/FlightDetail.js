@@ -59,10 +59,57 @@ export default class FlightDetail extends Component {
     let outboundFlight = selectedFlight.services[0];
     let returnFlight = selectedFlight.services[1];
     console.log(selectedFlight);
+    let firstRender = null;
+    let secondRender = null;
+
+    if (outboundFlight.segments.length > 1) {
+      firstRender = (
+        <>
+          <li>
+            From
+            {outboundFlight.segments[1].flightSegment.departure.iataCode}
+          </li>
+          <li>
+            To
+            {outboundFlight.segments[1].flightSegment.arrival.iataCode}
+          </li>
+          <li>
+            Carrier
+            {outboundFlight.segments[1].flightSegment.operating.carrierCode}
+          </li>
+          <li>
+            Duration
+            {outboundFlight.segments[1].flightSegment.duration}
+          </li>
+        </>
+      );
+    }
+    if (returnFlight.segments.length > 1) {
+      secondRender = (
+        <>
+          <li>
+            From
+            {returnFlight.segments[1].flightSegment.departure.iataCode}
+          </li>
+          <li>
+            To
+            {returnFlight.segments[1].flightSegment.arrival.iataCode}
+          </li>
+          <li>
+            Carrier
+            {returnFlight.segments[1].flightSegment.operating.carrierCode}
+          </li>
+          <li>
+            Duration
+            {returnFlight.segments[1].flightSegment.duration}
+          </li>
+        </>
+      );
+    }
 
     return (
       <div>
-        <div className="outbound-container">
+        <div className="roundtrip-container">
           <li>
             From
             {outboundFlight.segments[0].flightSegment.departure.iataCode}
@@ -97,7 +144,7 @@ export default class FlightDetail extends Component {
           </li>
         </div>
 
-        <div className="outbound-container">
+        <div className="roundtrip-container">
           <li>
             From
             {returnFlight.segments[0].flightSegment.departure.iataCode}

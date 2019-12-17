@@ -22,7 +22,6 @@ export default class MyTrips extends Component {
     }
 
 
-
     showPictures = () => {
         if (this.state.pictures !== undefined){
       
