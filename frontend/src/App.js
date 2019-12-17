@@ -15,13 +15,15 @@ import CheapFlights from "./components/Flights/CheapFlights";
 import HotelSearch from "./components/Hotels/HotelSearch";
 import CheckPrices from "./components/Flights/CheckPrices";
 import PassengerDetailForm from "./components/Flights/PassengerDetailForm";
+import TripDashboard from "./components/profile/TripDashboard"
+import FlightDetail from "./components/Flights/FlightDetail";
 
 class App extends Component {
   state = {};
 
   async componentDidMount() {
     let user = await actions.isLoggedIn();
-
+    console.log(user);
     let headers = await this.getToken();
     console.log(headers);
 
@@ -62,7 +64,7 @@ class App extends Component {
         <Navbar bg="light" expand="lg">
           <Navbar.Brand>
             <NavLink to="/" className="text-dark">
-              TripApp
+              Whim
             </NavLink>
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -84,6 +86,9 @@ class App extends Component {
                   </NavLink>
                   <NavLink className="mr-2 text-dark" to="/hotel-search">
                     Hotels
+                  </NavLink>
+                  <NavLink className="mr-2 text-dark" to="/dashboard">
+                    Dashboard
                   </NavLink>
                   <NavLink className="mr-2 text-dark" to="/profile">
                     Profile
@@ -157,6 +162,11 @@ class App extends Component {
             path="/mytrips/:id"
             render={props => <MyTrips {...props} user={this.state} />}
           />
+           <Route
+            exact
+            path="/dashboard"
+            render={props => <TripDashboard {...props} user={this.state} />}
+          />
           <Route
             exact
             path="/check-prices"
@@ -165,16 +175,17 @@ class App extends Component {
               <CheckPrices
                 {...props}
                 user={this.state}
+                setUser={this.setUser}
                 headers={this.state.headers}
               />
             )}
           />
           <Route
             exact
-            path="/passenger-details"
-            component={PassengerDetailForm}
+            path="/flight-details"
+            component={FlightDetail}
             render={props => (
-              <CheckPrices
+              <FlightDetail
                 {...props}
                 user={this.state}
                 headers={this.state.headers}

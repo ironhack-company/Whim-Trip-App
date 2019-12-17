@@ -14,6 +14,7 @@ export default class CheckPrices extends Component {
 
   componentDidMount() {
     console.log("Component mounted");
+    console.log(this.props.location.props.user)
     this.getPrices();
   }
 
@@ -53,14 +54,69 @@ export default class CheckPrices extends Component {
   displayPrices = () => {
     console.log("calling display prices");
     if (this.state.flightData) {
-      return this.state.flightData.map((flight, i) => {
+      console.log(this.state.flightData)
+      let sorted = this.state.flightData.sort(function(a,b){
+        return a.offerItems[0].price.total - b.offerItems[0].price.total
+      })
+      console.log(sorted)
+      return this.state.flightData.splice(0,5).map((flight, i) => {
+       
         console.log(flight);
         let outboundFlight = flight.offerItems[0].services[0];
         let returnFlight = flight.offerItems[0].services[1];
+        let firstRender = null;
+        let secondRender = null;
+
+        if (outboundFlight.segments.length > 1) {
+          firstRender = (
+            <>
+              <li>
+                From
+                {outboundFlight.segments[1].flightSegment.departure.iataCode}
+              </li>
+              <li>
+                To
+                {outboundFlight.segments[1].flightSegment.arrival.iataCode}
+              </li>
+              <li>
+                Carrier
+                {outboundFlight.segments[1].flightSegment.operating.carrierCode}
+              </li>
+              <li>
+                Duration
+                {outboundFlight.segments[1].flightSegment.duration}
+              </li>
+            </>
+          );
+        }
+        if (returnFlight.segments.length > 1) {
+          secondRender = (
+            <>
+              <li>
+                From
+                {returnFlight.segments[1].flightSegment.departure.iataCode}
+              </li>
+              <li>
+                To
+                {returnFlight.segments[1].flightSegment.arrival.iataCode}
+              </li>
+              <li>
+                Carrier
+                {returnFlight.segments[1].flightSegment.operating.carrierCode}
+              </li>
+              <li>
+                Duration
+                {returnFlight.segments[1].flightSegment.duration}
+              </li>
+            </>
+          );
+        }
         return (
           <ul key={i}>
             <div>
               <div className="outbound-container">
+                <li>Price {flight.offerItems[0].price.total} </li>
+                <li>Tax {flight.offerItems[0].price.totalTaxes} </li>
                 <li>
                   From
                   {outboundFlight.segments[0].flightSegment.departure.iataCode}
@@ -80,25 +136,7 @@ export default class CheckPrices extends Component {
                   Duration
                   {outboundFlight.segments[0].flightSegment.duration}
                 </li>
-                <li>
-                  From
-                  {outboundFlight.segments[1].flightSegment.departure.iataCode}
-                </li>
-                <li>
-                  To
-                  {outboundFlight.segments[1].flightSegment.arrival.iataCode}
-                </li>
-                <li>
-                  Carrier
-                  {
-                    outboundFlight.segments[1].flightSegment.operating
-                      .carrierCode
-                  }
-                </li>
-                <li>
-                  Duration
-                  {outboundFlight.segments[1].flightSegment.duration}
-                </li>
+                {firstRender}
               </div>
               <div>
                 <li>
@@ -133,30 +171,19 @@ export default class CheckPrices extends Component {
                   Duration
                   {returnFlight.segments[0].flightSegment.duration}
                 </li>
-                <li>
-                  From
-                  {returnFlight.segments[1].flightSegment.departure.iataCode}
-                </li>
-                <li>
-                  To
-                  {returnFlight.segments[1].flightSegment.arrival.iataCode}
-                </li>
-                <li>
-                  Carrier
-                  {returnFlight.segments[1].flightSegment.operating.carrierCode}
-                </li>
-                <li>
-                  Duration
-                  {returnFlight.segments[1].flightSegment.duration}
-                </li>
-                <li>Price {flight.offerItems[0].price.total} </li>
+                {console.log(
+                  returnFlight.segments,
+                  returnFlight.segments.length
+                )}
+                {secondRender}
               </div>
             </div>
             <button>
               <Link
                 to={{
-                  pathname: "/passenger-details",
-                  flight: { flight }
+                  pathname: "/flight-details",
+                  flight: { flight },
+                  user: this.props.location.props.user
                 }}
               >
                 Book flight

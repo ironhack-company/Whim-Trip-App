@@ -8,7 +8,10 @@ import airports from '../../data/airports';
  
  
 export default class HotelSearch extends Component {
+
+
     state = {
+      selectedFlight: null,
         searchQuery: "",
         searchTo: "",
         flights: [],
@@ -20,6 +23,8 @@ export default class HotelSearch extends Component {
       };
    
       componentDidMount() {
+
+        
 
         navigator.geolocation.getCurrentPosition(
           position => {
@@ -44,20 +49,17 @@ export default class HotelSearch extends Component {
       let cityFrom = this.state.searchQuery
       let cityTo = this.state.searchTo
 
-
       let airportFrom = airports.find(airport => {
-        return (airport.city.toLowerCase() == cityFrom || airport.iata_code == cityFrom) // airport.state == cityFrom ||
+        return (airport.city == cityFrom || airport.city.toLowerCase() == cityFrom || airport.iata_code == cityFrom) // airport.state == cityFrom ||
       })
       let airportTo = airports.find(airport => {
-        return (airport.city.toLowerCase() == cityTo || airport.iata_code == cityTo) // airport.state == cityFrom ||
+        return (airport.city == cityTo || airport.city.toLowerCase() == cityTo || airport.iata_code == cityTo) // airport.state == cityFrom ||
       })
 
       let from = airportFrom ? airportFrom.iata_code : cityFrom
 			let to = airportTo ? airportTo.iata_code : cityTo
       // IATA to City Name
       
-
-
 
         //get token on mount
         console.log("getFlight!");
@@ -180,9 +182,8 @@ export default class HotelSearch extends Component {
         e.preventDefault();
         this.getFlights(); //after the user told you what to
       };
-
-
       
+
    
       showFlights = () => {
         return this.state.filteredFlights.map((flight, index) => {
@@ -203,8 +204,8 @@ export default class HotelSearch extends Component {
               <li>Carrier {flight.offerItems[0].services[0].segments[0].flightSegment.operating.carrierCode}</li>
               <li>Duration {flight.offerItems[0].services[0].segments[0].flightSegment.duration}</li>
 
-              <h4>OutBound</h4>
-              <li>From {flight.offerItems[0].services[0].segments[1].flightSegment.departure.iataCode}</li>
+              {/* <h4>OutBound</h4>
+              <li>From {flight.offerItems[0].services[0].segments[1].flightSegment.departure.iataCode}</li> */}
               {/* <li>To {flight.offerItems[0].services[0].segments[1].flightSegment.arrival.iataCode}</li>
               <li>Carrier {flight.offerItems[0].services[0].segments[1].flightSegment.operating.carrierCode}</li>
               <li>Duration {flight.offerItems[0].services[0].segments[1].flightSegment.duration}</li> */}

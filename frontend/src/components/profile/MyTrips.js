@@ -12,14 +12,13 @@ export default class MyTrips extends Component {
         .then(data => {
             console.log(data)
             this.setState({
-                location: data.data.location,
-                start: data.data.startDate,
-                end: data.data.endDate,
-                pictures: data.data.pictures,
-            })
-        })
+              location: data.data.location,
+              start: data.data.startDate,
+              end: data.data.endDate,
+              pictures: data.data.pictures
+            });
+          });
     }
-
 
 
     showPictures = () => {
