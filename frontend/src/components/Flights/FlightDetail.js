@@ -238,7 +238,7 @@ export default class FlightDetail extends Component {
                 onChange={this.handleChange}
               />
             </Form.Group>
-            <Link to="/dashboard">
+            <Link to={{ pathname: "/check-prices" }}>
               <Button
                 id="submit"
                 type="submit"
