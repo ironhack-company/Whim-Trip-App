@@ -19,6 +19,7 @@ export default class HotelSearch extends Component {
         userLocation: { lat: 32, lng: 32 },
         loading: true,
         cityFrom: [],
+        cityFullName: [],
         
       };
    
@@ -88,6 +89,15 @@ export default class HotelSearch extends Component {
               .then(response => {
                 const data = response.data.data;
                 console.log("data", response, data.data);
+
+                let firstCity = data.Places.find(eachPlace => {
+                  return eachPlace.CityId.includes(cityTo) || eachPlace.CityName.includes(cityTo);
+                })
+                let secondCity = data.Places.find(eachPlace => {
+                  return eachPlace.CityId.includes(cityFrom) || eachPlace.CityName.includes(cityFrom);
+                })
+      
+      
  
                 // let firstCity = data.data.find(eachPlace => {
                 //   return eachPlace.CityId.includes(this.state.cityFrom) || eachPlace.CityName.includes(this.state.cityFrom);
@@ -114,19 +124,6 @@ export default class HotelSearch extends Component {
  
       handleInputChange = e => { // cityFrom
  
-        // console.log(cityTo)
- 
-        // let cityTo = e.target.elements.cityFrom.value;
-   
-   
-        // let airportTo = airports.find(airport => {
-        //   return (airport.city == cityTo || airport.code == cityTo)
-        // })
-   
-        // let airportFrom = airports.find(airport => {
-        //   return (airport.city == cityFrom || airport.code == cityFrom) // airport.state == cityFrom ||
-        // })
-   
  
        
         console.log(this.state);
@@ -190,6 +187,9 @@ export default class HotelSearch extends Component {
           let airportFrom = airports.find(airport => {
             if (airport.iata_code == flight.offerItems[0].services[0].segments[0].flightSegment.departure.iataCode) {
               console.log(airport.city)
+              this.setState({
+
+              })
             }
           })
           console.log(airportFrom)
