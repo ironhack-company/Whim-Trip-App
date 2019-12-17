@@ -181,7 +181,8 @@ export class FlightSearch extends Component {
                   props: {
                     flightLink: flight.links.flightOffers,
                     user: this.props.user,
-                    headers: this.props.headers
+                    headers: this.props.headers,
+                    destination: flight.destination
                   }
                 }}
               >

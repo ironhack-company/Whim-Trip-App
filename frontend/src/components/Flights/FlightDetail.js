@@ -148,7 +148,7 @@ export default class FlightDetail extends Component {
 
   handleSubmit = e => {
     console.log("handling submit");
-    e.preventDefault();
+    // e.preventDefault();
     console.log(this.props);
     let copyUser = this.props.location.user;
     console.log(copyUser);
@@ -178,6 +178,7 @@ export default class FlightDetail extends Component {
   render() {
     console.log(this.props.location.flight.flight.offerItems[0]);
     console.log(this.state);
+    console.log(this.props)
     return (
       <div>
         <h2>Your flight detail</h2>
@@ -238,7 +239,11 @@ export default class FlightDetail extends Component {
                 onChange={this.handleChange}
               />
             </Form.Group>
-            <Link to="/dashboard">
+            <Link to={{pathname: "/dashboard",
+            myFlight: this.state.selectedFlight,
+            user: this.props.location.user
+            }}
+            >
               <Button
                 id="submit"
                 type="submit"

@@ -18,7 +18,7 @@ export default class HotelSearch extends Component {
     return (
         <div>
 
-            <ins class="bookingaff" data-aid="1928826" data-target_aid="1928826" data-prod="map" data-width="100%" data-height="590" data-lang="ualng" data-dest_id="0" data-dest_type="landmark" data-latitude="25.7616798" data-longitude="-80.1917902" data-mwhsb="0" data-address="Miami, FL, USA">
+            <ins class="bookingaff" data-aid="1928826" data-target_aid="1928826" data-prod="map" data-width="100%" data-height="590" data-lang="ualng" data-dest_id="0" data-dest_type="landmark" data-latitude="25.7616798" data-longitude="-80.1917902" data-mwhsb="0" >
                     <a href="//www.booking.com?aid=1928826">Booking.com</a>
             </ins>
             
