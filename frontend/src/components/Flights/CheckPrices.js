@@ -53,7 +53,13 @@ export default class CheckPrices extends Component {
   displayPrices = () => {
     console.log("calling display prices");
     if (this.state.flightData) {
-      return this.state.flightData.map((flight, i) => {
+      console.log(this.state.flightData)
+      let sorted = this.state.flightData.sort(function(a,b){
+        return a.offerItems[0].price.total - b.offerItems[0].price.total
+      })
+      console.log(sorted)
+      return this.state.flightData.splice(0,5).map((flight, i) => {
+       
         console.log(flight);
         let outboundFlight = flight.offerItems[0].services[0];
         let returnFlight = flight.offerItems[0].services[1];
