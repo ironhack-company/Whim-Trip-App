@@ -22,8 +22,9 @@ router.get('/mytrips/:id', (req, res, next)=>{
   })
 }
 )
-
 console.log('adding some things in here the server file')
+
+
 
 router.get('/flight-search', (req, res, next)=>{
 
@@ -54,11 +55,6 @@ router.post('/add-flight/:id', (req, res, next)=>{
 
 })
 
-// router.put('/add-flight', (req, res, next) => {
-
-//   let {}
-
-// })
 
   
 
