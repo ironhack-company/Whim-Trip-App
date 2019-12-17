@@ -14,7 +14,7 @@ import FlightSearch from "./components/Flights/FlightSearch";
 import CheapFlights from "./components/Flights/CheapFlights";
 import HotelSearch from "./components/Hotels/HotelSearch";
 import CheckPrices from "./components/Flights/CheckPrices";
-import PassengerDetailForm from "./components/Flights/PassengerDetailForm";
+import FlightDetail from "./components/Flights/FlightDetail";
 
 class App extends Component {
   state = {};
@@ -172,7 +172,7 @@ class App extends Component {
           <Route
             exact
             path="/passenger-details"
-            component={PassengerDetailForm}
+            component={FlightDetail}
             render={props => (
               <CheckPrices
                 {...props}

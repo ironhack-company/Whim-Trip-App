@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
 import { thisExpression } from "@babel/types";
+import PassengerForm from "./PassengerForm";
 
-export default class PassengerDetailForm extends Component {
+export default class FlightDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -156,6 +157,7 @@ export default class PassengerDetailForm extends Component {
       <div>
         <h2>Your flight detail</h2>
         <div>{this.displaySelectedPrices()}</div>);
+        <PassengerForm />
       </div>
     );
   }
