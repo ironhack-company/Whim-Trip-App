@@ -10,6 +10,10 @@ class Profile extends Component {
     user: this.props.user
   }
 
+  componentDidMount = () => {
+    console.log(this.state.user)
+  }
+
 
   showMyTrips = () => {
     return this.state.user.trips.map((eachTrip) => {
@@ -25,9 +29,70 @@ class Profile extends Component {
 
       return this.state.user.flights.map(flight => {
         return (
-          <div>
-            {flight.origin} to {flight.destination}
+          <div className="flight flex" >
+          <div className="flight-buy">
+            <button>
+              <Link
+                to={{
+                  pathname: "/check-prices",
+                  props: {
+                    flightLink: `${flight.links.flightOffers}`,
+                    headers: this.props.headers
+                  }
+                }}
+              >
+                Check prices to {flight.destination}
+              </Link>
+            </button>
+            <button onClick={e => this.saveFlight(e, flight)}>
+            {flight.price.total} USD
+
+            </button>
           </div>
+          <div className="flight-info flex">
+            <div>
+              {/* <h3></h3> */}
+              <span>{flight.origin}</span>
+              <span className="gray">
+                {/* { departure } */}
+                {flight.departureDate}
+              </span>
+            </div>
+            <div>
+              <span className="gray">
+                {/* {keyName.MinPrice} */}
+                🛫
+              </span>
+            </div>
+            <div>
+              {/* <h3></h3> */}
+              <span>{flight.destination}</span>
+              <span className="gray">{flight.returnDate}</span>
+            </div>
+          </div>
+
+          <div className="flight-info2 flex2">
+            <div>
+              {/* <h3></h3> */}
+              <span>{flight.destination}</span>
+              <span className="gray">
+                {/* { departure } */}
+                Outbound
+              </span>
+            </div>
+            <div>
+              <span className="gray">
+                {/* {keyName.MinPrice} USD */}
+                🛬
+              </span>
+            </div>
+            <div>
+              {/* <h3></h3> */}
+              <span>{flight.origin}</span>
+              <span className="gray">Outbound</span>
+            </div>
+          </div>
+        </div>
         )
       })
     }

@@ -1,6 +1,10 @@
 frontend/node_modules
 backend/node_modules
+<<<<<<< HEAD
+node_modules/
+=======
 node_modules
+>>>>>>> 4e58c39bca6bfbefd86968c7d4763e140639b016
 .env
 certs
 certs/
