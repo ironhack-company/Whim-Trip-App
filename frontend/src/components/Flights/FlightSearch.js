@@ -142,7 +142,7 @@ export class FlightSearch extends Component {
       filteredFlights: filteredFlights
     });
   };
-  
+
   onClickOnMarker = (props, marker, e) => {
     this.setState({
       selectedPlace: props,
@@ -179,7 +179,8 @@ export class FlightSearch extends Component {
                 to={{
                   pathname: "/check-prices",
                   props: {
-                    flightLink: `${flight.links.flightOffers}`,
+                    flightLink: flight.links.flightOffers,
+                    user: this.props.user,
                     headers: this.props.headers
                   }
                 }}
@@ -267,48 +268,39 @@ export class FlightSearch extends Component {
 
       <div className="container-fluid">
         <div className="row">
-
-
-
-
-
-
           {/* <div className="flightSearchPage col"> */}
-            <Fragment>
-              <div className="flightSearch col ">
-                <div>
-                  <form className="searchForm" onSubmit={this.handleSubmit}>
-                    <input
-                      className="searchBar"
-                      placeholder="Search aiports"
-                      value={this.state.query}
-                      onChange={this.handleInputChange}
-                    />
-                    <input className="searchBttn" type="submit" value="GO" />
-                  </form>
-                </div>
-                <div className="showFlights">{this.showFlights()}</div>
+          <Fragment>
+            <div className="flightSearch col ">
+              <div>
+                <form className="searchForm" onSubmit={this.handleSubmit}>
+                  <input
+                    className="searchBar"
+                    placeholder="Search aiports"
+                    value={this.state.query}
+                    onChange={this.handleInputChange}
+                  />
+                  <input className="searchBttn" type="submit" value="GO" />
+                </form>
               </div>
-            </Fragment>
+              <div className="showFlights">{this.showFlights()}</div>
+            </div>
+          </Fragment>
           {/* </div> */}
 
           <div className="mapDiv col">
-                  <Map google={google} initialCenter={userLocation} zoom={10}>
-                    <Marker onClick={this.onMarkerClick} name={"Current location"} />
-                    {this.getLocationData()}
-                    <InfoWindow
-                      marker={this.state.activeMarker}
-                      visible={this.state.showingInfoWindow}
-                    >
-                      <div>
-                        <h1>{this.state.selectedPlace.name}</h1>
-                      </div>
-                    </InfoWindow>
-                  </Map>
-
+            <Map google={google} initialCenter={userLocation} zoom={10}>
+              <Marker onClick={this.onMarkerClick} name={"Current location"} />
+              {this.getLocationData()}
+              <InfoWindow
+                marker={this.state.activeMarker}
+                visible={this.state.showingInfoWindow}
+              >
+                <div>
+                  <h1>{this.state.selectedPlace.name}</h1>
                 </div>
-
-
+              </InfoWindow>
+            </Map>
+          </div>
         </div>
       </div>
       // </div>

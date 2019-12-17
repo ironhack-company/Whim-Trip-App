@@ -16,13 +16,14 @@ import HotelSearch from "./components/Hotels/HotelSearch";
 import CheckPrices from "./components/Flights/CheckPrices";
 import PassengerDetailForm from "./components/Flights/PassengerDetailForm";
 import TripDashboard from "./components/profile/TripDashboard"
+import FlightDetail from "./components/Flights/FlightDetail";
 
 class App extends Component {
   state = {};
 
   async componentDidMount() {
     let user = await actions.isLoggedIn();
-
+    console.log(user);
     let headers = await this.getToken();
     console.log(headers);
 
@@ -174,16 +175,17 @@ class App extends Component {
               <CheckPrices
                 {...props}
                 user={this.state}
+                setUser={this.setUser}
                 headers={this.state.headers}
               />
             )}
           />
           <Route
             exact
-            path="/passenger-details"
-            component={PassengerDetailForm}
+            path="/flight-details"
+            component={FlightDetail}
             render={props => (
-              <CheckPrices
+              <FlightDetail
                 {...props}
                 user={this.state}
                 headers={this.state.headers}
