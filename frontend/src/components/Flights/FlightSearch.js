@@ -6,6 +6,7 @@ import "./FlightSearch2.css";
 
 import { Link, Redirect } from "react-router-dom";
 import Loader from "react-loader-spinner";
+import airports from '../../data/airports';
 
 export class FlightSearch extends Component {
   state = {
@@ -31,6 +32,7 @@ export class FlightSearch extends Component {
     ]
   };
   componentDidMount() {
+    console.log(airports)
     console.log("Components!");
     // console.log(this.props)
     axios.get("http://localhost:5000/flight-search").then(data =>
@@ -78,8 +80,20 @@ export class FlightSearch extends Component {
   };
 
   getFlights = () => {
-    const RAPIDAPI_API_URL = `https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=${this
-      .state.searchQuery || this.state.searchCode}`; // if you fetch in componentDidMount it returns error because there is no origin when the page is loaded
+
+    let cityFrom = this.state.searchQuery
+
+
+
+    let airportFrom = airports.find(airport => {
+      return (airport.city.toLowerCase() == cityFrom || airport.iata_code == cityFrom) // airport.state == cityFrom ||
+    })
+
+
+    let from = airportFrom ? airportFrom.iata_code : cityFrom
+
+
+    const RAPIDAPI_API_URL = `https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=${from || this.state.searchCode}`; // if you fetch in componentDidMount it returns error because there is no origin when the page is loaded
     console.log(this);
     axios
       .get(RAPIDAPI_API_URL, { headers: this.props.headers }) //use token to get data
