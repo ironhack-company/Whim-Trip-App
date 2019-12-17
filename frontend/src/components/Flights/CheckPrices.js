@@ -14,6 +14,7 @@ export default class CheckPrices extends Component {
 
   componentDidMount() {
     console.log("Component mounted");
+    console.log(this.props.location.props.user)
     this.getPrices();
   }
 
@@ -174,8 +175,9 @@ export default class CheckPrices extends Component {
             <button>
               <Link
                 to={{
-                  pathname: "/passenger-details",
-                  flight: { flight }
+                  pathname: "/flight-details",
+                  flight: { flight },
+                  user: this.props.location.props.user
                 }}
               >
                 Book flight

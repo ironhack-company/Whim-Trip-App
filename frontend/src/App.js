@@ -21,7 +21,7 @@ class App extends Component {
 
   async componentDidMount() {
     let user = await actions.isLoggedIn();
-
+    console.log(user);
     let headers = await this.getToken();
     console.log(headers);
 
@@ -165,16 +165,17 @@ class App extends Component {
               <CheckPrices
                 {...props}
                 user={this.state}
+                setUser={this.setUser}
                 headers={this.state.headers}
               />
             )}
           />
           <Route
             exact
-            path="/passenger-details"
+            path="/flight-details"
             component={FlightDetail}
             render={props => (
-              <CheckPrices
+              <FlightDetail
                 {...props}
                 user={this.state}
                 headers={this.state.headers}

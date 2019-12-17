@@ -179,7 +179,8 @@ export class FlightSearch extends Component {
                 to={{
                   pathname: "/check-prices",
                   props: {
-                    flightLink: `${flight.links.flightOffers}`,
+                    flightLink: flight.links.flightOffers,
+                    user: this.props.user,
                     headers: this.props.headers
                   }
                 }}
