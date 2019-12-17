@@ -164,7 +164,7 @@ class App extends Component {
           />
            <Route
             exact
-            path="/my-trip"
+            path="/dashboard"
             render={props => <TripDashboard {...props} user={this.state} />}
           />
           <Route
