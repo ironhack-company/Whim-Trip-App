@@ -25,7 +25,7 @@ export default class FlightDetail extends Component {
     console.log(this.state);
   }
 
-  saveFlight = (e, flight) => {
+  bookFlight = (e, flight) => {
     e.preventDefault();
     console.log(this.props.user);
     let copyUser = this.props.user;
@@ -109,7 +109,9 @@ export default class FlightDetail extends Component {
 
     return (
       <div>
-        <div className="roundtrip-container">
+        <div className="border-bottom">
+          <li>Price {selectedFlight.price.total} </li>
+          <li>Tax {selectedFlight.price.totalTaxes} </li>
           <li>
             From
             {outboundFlight.segments[0].flightSegment.departure.iataCode}
@@ -126,25 +128,10 @@ export default class FlightDetail extends Component {
             Duration
             {outboundFlight.segments[0].flightSegment.duration}
           </li>
-          <li>
-            From
-            {outboundFlight.segments[1].flightSegment.departure.iataCode}
-          </li>
-          <li>
-            To
-            {outboundFlight.segments[1].flightSegment.arrival.iataCode}
-          </li>
-          <li>
-            Carrier
-            {outboundFlight.segments[1].flightSegment.operating.carrierCode}
-          </li>
-          <li>
-            Duration
-            {outboundFlight.segments[1].flightSegment.duration}
-          </li>
+          {firstRender}
         </div>
 
-        <div className="roundtrip-container">
+        <div className="border-bottom">
           <li>
             From
             {returnFlight.segments[0].flightSegment.departure.iataCode}
@@ -177,23 +164,7 @@ export default class FlightDetail extends Component {
             Duration
             {returnFlight.segments[0].flightSegment.duration}
           </li>
-          <li>
-            From
-            {returnFlight.segments[1].flightSegment.departure.iataCode}
-          </li>
-          <li>
-            To
-            {returnFlight.segments[1].flightSegment.arrival.iataCode}
-          </li>
-          <li>
-            Carrier
-            {returnFlight.segments[1].flightSegment.operating.carrierCode}
-          </li>
-          <li>
-            Duration
-            {returnFlight.segments[1].flightSegment.duration}
-          </li>
-          <li>Price {selectedFlight.price.total} </li>
+          {secondRender}
         </div>
       </div>
     );
