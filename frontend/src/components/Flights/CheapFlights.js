@@ -19,7 +19,6 @@ export default class HotelSearch extends Component {
         userLocation: { lat: 32, lng: 32 },
         loading: true,
         cityFrom: [],
-        cityFullName: [],
         
       };
    
@@ -50,6 +49,7 @@ export default class HotelSearch extends Component {
       let cityFrom = this.state.searchQuery
       let cityTo = this.state.searchTo
 
+
       let airportFrom = airports.find(airport => {
         return (airport.city == cityFrom || airport.city.toLowerCase() == cityFrom || airport.iata_code == cityFrom) // airport.state == cityFrom ||
       })
@@ -61,6 +61,8 @@ export default class HotelSearch extends Component {
 			let to = airportTo ? airportTo.iata_code : cityTo
       // IATA to City Name
       
+
+
 
         //get token on mount
         console.log("getFlight!");
@@ -89,15 +91,6 @@ export default class HotelSearch extends Component {
               .then(response => {
                 const data = response.data.data;
                 console.log("data", response, data.data);
-
-                let firstCity = data.Places.find(eachPlace => {
-                  return eachPlace.CityId.includes(cityTo) || eachPlace.CityName.includes(cityTo);
-                })
-                let secondCity = data.Places.find(eachPlace => {
-                  return eachPlace.CityId.includes(cityFrom) || eachPlace.CityName.includes(cityFrom);
-                })
-      
-      
  
                 // let firstCity = data.data.find(eachPlace => {
                 //   return eachPlace.CityId.includes(this.state.cityFrom) || eachPlace.CityName.includes(this.state.cityFrom);
@@ -124,6 +117,19 @@ export default class HotelSearch extends Component {
  
       handleInputChange = e => { // cityFrom
  
+        // console.log(cityTo)
+ 
+        // let cityTo = e.target.elements.cityFrom.value;
+   
+   
+        // let airportTo = airports.find(airport => {
+        //   return (airport.city == cityTo || airport.code == cityTo)
+        // })
+   
+        // let airportFrom = airports.find(airport => {
+        //   return (airport.city == cityFrom || airport.code == cityFrom) // airport.state == cityFrom ||
+        // })
+   
  
        
         console.log(this.state);
@@ -180,29 +186,83 @@ export default class HotelSearch extends Component {
         this.getFlights(); //after the user told you what to
       };
       
+      findName = (code) => {
+        let airport =  airports.find(air => air.iata_code == code)
+        return airport.city;
+      }
 
-   
+      showSegments = (segments) => {
+        return segments.map((segment,i)=> {
+          return ( 
+            <ul> <div class="leg">{i + 1} leg </div>
+            <li>{this.findName(segment.flightSegment.departure.iataCode)}</li>
+            <li>{this.findName(segment.flightSegment.arrival.iataCode)}</li>
+            </ul>
+          )
+        })
+      }
       showFlights = () => {
         return this.state.filteredFlights.map((flight, index) => {
           let airportFrom = airports.find(airport => {
             if (airport.iata_code == flight.offerItems[0].services[0].segments[0].flightSegment.departure.iataCode) {
               console.log(airport.city)
-              this.setState({
-
-              })
             }
           })
           console.log(airportFrom)
           console.log(flight);
           console.log(flight.offerItems[0].services[0].segments[0].flightSegment);
- 
+          // 
+          // if (flight.offerItems[0].services[0].segments.length == 1) {
+          //   console.log("one leg trip")
+          //           return (
+          //             <ul key={index}>
+          //               <h4>Outbound</h4>
+          //               <li>From {flight.offerItems[0].services[0].segments[0].flightSegment.departure.iataCode}</li>
+          //               <li>To {flight.offerItems[0].services[0].segments[0].flightSegment.arrival.iataCode}</li>
+          //               <li>Carrier {flight.offerItems[0].services[0].segments[0].flightSegment.operating.carrierCode}</li>
+          //               <li>Duration {flight.offerItems[0].services[0].segments[0].flightSegment.duration}</li>
+          //               <li>Price {flight.offerItems[0].price.total}  </li>
+          //             </ul>
+          //           );
+                  // }
+                  // if (flight.offerItems[0].services[0].segments.length == 2) {
+                  //   console.log("multi leg trip")
+                  //   return (
+                  //     <div>
+                  //       <ul key={index}>
+                  //         <h4>First Leg</h4>
+                  //         <li>From {flight.offerItems[0].services[0].segments[0].flightSegment.departure.iataCode}</li>
+                  //         <li>To {flight.offerItems[0].services[0].segments[0].flightSegment.arrival.iataCode}</li>
+                  //         <li>Carrier {flight.offerItems[0].services[0].segments[0].flightSegment.operating.carrierCode}</li>
+                  //         <li>Duration {flight.offerItems[0].services[0].segments[0].flightSegment.duration}</li>
+                  //         <li>Price {flight.offerItems[0].price.total}  </li>
+                  //       </ul>
+                  //       <ul key={index}>
+                  //         <h4>Second Leg</h4>
+                  //         <li>From {flight.offerItems[0].services[0].segments[1].flightSegment.departure.iataCode}</li>
+                  //         <li>To {flight.offerItems[0].services[0].segments[1].flightSegment.arrival.iataCode}</li>
+                  //         <li>Carrier {flight.offerItems[0].services[0].segments[1].flightSegment.operating.carrierCode}</li>
+                  //         <li>Duration {flight.offerItems[0].services[0].segments[1].flightSegment.duration}</li>
+                  //         <li>Price {flight.offerItems[0].price.total}  </li>
+                  //       </ul>
+                  //     </div>
+                  //   );
+             
+             
+                 // }
+             
+             
           return (
             <ul key={index}>
               <h4>Inbound</h4>
+                        {this.showSegments(flight.offerItems[0].services[0].segments)}
               <li>From {flight.offerItems[0].services[0].segments[0].flightSegment.departure.iataCode}</li>
               <li>To {flight.offerItems[0].services[0].segments[0].flightSegment.arrival.iataCode}</li>
               <li>Carrier {flight.offerItems[0].services[0].segments[0].flightSegment.operating.carrierCode}</li>
               <li>Duration {flight.offerItems[0].services[0].segments[0].flightSegment.duration}</li>
+              <li>Price {flight.offerItems[0].price.total}  </li>
+              </ul>
+              );
 
               {/* <h4>OutBound</h4>
               <li>From {flight.offerItems[0].services[0].segments[1].flightSegment.departure.iataCode}</li> */}
@@ -212,10 +272,7 @@ export default class HotelSearch extends Component {
 
  
  
-              <li>Price {flight.offerItems[0].price.total}  </li>
  
-            </ul>
-          );
         });
       };
  
