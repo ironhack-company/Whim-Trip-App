@@ -211,46 +211,6 @@ export default class HotelSearch extends Component {
           console.log(airportFrom)
           console.log(flight);
           console.log(flight.offerItems[0].services[0].segments[0].flightSegment);
-          // 
-          // if (flight.offerItems[0].services[0].segments.length == 1) {
-          //   console.log("one leg trip")
-          //           return (
-          //             <ul key={index}>
-          //               <h4>Outbound</h4>
-          //               <li>From {flight.offerItems[0].services[0].segments[0].flightSegment.departure.iataCode}</li>
-          //               <li>To {flight.offerItems[0].services[0].segments[0].flightSegment.arrival.iataCode}</li>
-          //               <li>Carrier {flight.offerItems[0].services[0].segments[0].flightSegment.operating.carrierCode}</li>
-          //               <li>Duration {flight.offerItems[0].services[0].segments[0].flightSegment.duration}</li>
-          //               <li>Price {flight.offerItems[0].price.total}  </li>
-          //             </ul>
-          //           );
-                  // }
-                  // if (flight.offerItems[0].services[0].segments.length == 2) {
-                  //   console.log("multi leg trip")
-                  //   return (
-                  //     <div>
-                  //       <ul key={index}>
-                  //         <h4>First Leg</h4>
-                  //         <li>From {flight.offerItems[0].services[0].segments[0].flightSegment.departure.iataCode}</li>
-                  //         <li>To {flight.offerItems[0].services[0].segments[0].flightSegment.arrival.iataCode}</li>
-                  //         <li>Carrier {flight.offerItems[0].services[0].segments[0].flightSegment.operating.carrierCode}</li>
-                  //         <li>Duration {flight.offerItems[0].services[0].segments[0].flightSegment.duration}</li>
-                  //         <li>Price {flight.offerItems[0].price.total}  </li>
-                  //       </ul>
-                  //       <ul key={index}>
-                  //         <h4>Second Leg</h4>
-                  //         <li>From {flight.offerItems[0].services[0].segments[1].flightSegment.departure.iataCode}</li>
-                  //         <li>To {flight.offerItems[0].services[0].segments[1].flightSegment.arrival.iataCode}</li>
-                  //         <li>Carrier {flight.offerItems[0].services[0].segments[1].flightSegment.operating.carrierCode}</li>
-                  //         <li>Duration {flight.offerItems[0].services[0].segments[1].flightSegment.duration}</li>
-                  //         <li>Price {flight.offerItems[0].price.total}  </li>
-                  //       </ul>
-                  //     </div>
-                  //   );
-             
-             
-                 // }
-             
              
           return (
             <ul key={index}>
