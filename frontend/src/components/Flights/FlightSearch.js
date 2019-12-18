@@ -183,9 +183,28 @@ export class FlightSearch extends Component {
     console.log(this.state.flights);
   };
 
+
   showFlights = () => {
     return this.state.filteredFlights.map((flight, index) => {
       console.log(flight);
+      let destinationAirport = flight.destination;
+      console.log(destinationAirport)
+      let destinationCity = airports.find(city => {
+        return (
+          city.iata_code == destinationAirport
+        )
+      })
+
+      let theDestination
+      
+      destinationCity ? theDestination = destinationCity.city 
+      : theDestination = destinationCity
+
+      console.log(theDestination)
+      this.setState({
+        DestinationCityName: theDestination
+      })
+      
       return (
         <div className="flight flex" key={index}>
           <div className="flight-buy">
@@ -263,6 +282,7 @@ export class FlightSearch extends Component {
   };
 
   render() {
+    console.log(this.state)
     const { loading, userLocation } = this.state;
     const { google } = this.props;
 

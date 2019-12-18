@@ -15,6 +15,7 @@ export default class CheckPrices extends Component {
   componentDidMount() {
     console.log("Component mounted");
     console.log(this.props.location.user)
+    console.log(this.props)
     this.getPrices();
   }
 
@@ -198,6 +199,7 @@ export default class CheckPrices extends Component {
 
 
   render() {
+    console.log(this.props)
     // const loading = this.state;
     // if (loading) {
     //   return (
