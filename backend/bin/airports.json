@@ -1,5 +1,76 @@
 [
-  
+  {
+    "iata_code": "CHI",
+    "city": "Chicago"
+  },
+  {
+    "iata_code": "WAS",
+    "city": "Washington"
+  },
+  {
+    "iata_code": "DTT",
+    "city": "Detroit",
+    "state": "MI",
+    "country": "United States"
+  },
+  {
+    "iata_code": "HOU",
+    "city": "Houston",
+    "state": "TX",
+    "country": "United States"
+  },
+  {
+    "iata_code": "NYC",
+    "city": "New York",
+    "state": "New York",
+    "country": "United States"
+  },
+  {
+    "iata_code": "YMQ",
+    "city": "Montreal",
+    "state": "QC",
+    "country": "Canada"
+  },
+  {
+    "iata_code": "BER",
+    "city": "Berlin",
+    "country": "Germany"
+  },
+  {
+    "iata_code": "LON",
+    "city": "London",
+    "country": "United Kingdom"
+  },
+  {
+    "iata_code": "OSA",
+    "city": "Osaka",
+    "country": "Japan"
+  },
+  {
+    "iata_code": "PAR",
+    "city": "Paris",
+    "country": "France"
+  },
+  {
+    "iata_code": "ROM",
+    "city": "Rome",
+    "country": "Italy"
+  },
+  {
+    "iata_code": "SEL",
+    "city": "Seoul",
+    "country": "South Korea"
+  },
+  {
+    "iata_code": "STO",
+    "city": "Stockholm",
+    "country": "Sweden"
+  },
+  {
+    "iata_code": "TYO",
+    "city": "Tokyo",
+    "country": "Japan"
+  },
   {
     "name": "Hartsfield Jackson Atlanta Intl",
     "city": "Atlanta",
