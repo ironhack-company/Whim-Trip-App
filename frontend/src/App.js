@@ -15,8 +15,9 @@ import CheapFlights from "./components/Flights/CheapFlights";
 import HotelSearch from "./components/Hotels/HotelSearch";
 import CheckPrices from "./components/Flights/CheckPrices";
 import PassengerDetailForm from "./components/Flights/PassengerDetailForm";
-import TripDashboard from "./components/profile/TripDashboard"
+import TripDashboard from "./components/profile/TripDashboard";
 import FlightDetail from "./components/Flights/FlightDetail";
+import axios from "axios";
 
 class App extends Component {
   state = {};
@@ -26,7 +27,7 @@ class App extends Component {
     console.log(user);
     let headers = await this.getToken();
     console.log(headers);
-
+    this.fetchAllData();
     this.setState({ ...user.data, headers });
   }
 
@@ -56,6 +57,19 @@ class App extends Component {
   logOut = async () => {
     let res = await actions.logOut();
     this.setUser({ email: null, createdAt: null, updatedAt: null, _id: null }); //FIX
+  };
+
+  fetchAllData = async () => {
+    try {
+      let authors = await axios.get("http://whim-travel.co/");
+      let books = await axios.get("http://whim-travel.co/");
+      let currentUser = await axios.get("http://whim-travel.co/", {
+        withCredentials: true
+      });
+      this.setState({});
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   render() {
@@ -155,18 +169,30 @@ class App extends Component {
           <Route
             exact
             path="/profile"
-            render={props => <Profile {...props} user={this.state} />}
+            render={props => (
+              <Profile
+                {...props}
+                user={this.state}
+                updateAll={this.fetchAllData}
+              />
+            )}
           />
           <Route
             exact
             path="/mytrips/:id"
             render={props => <MyTrips {...props} user={this.state} />}
           />
-           <Route
+          <Route
             exact
             path="/dashboard"
             component={TripDashboard}
-            render={props => <TripDashboard {...props} setUser={this.setUser} user={this.state} />}
+            render={props => (
+              <TripDashboard
+                {...props}
+                setUser={this.setUser}
+                user={this.state}
+              />
+            )}
           />
           <Route
             exact

@@ -33,7 +33,7 @@ export class FlightSearch extends Component {
   };
   componentDidMount() {
     console.log(airports);
-    console.log("Components!");
+    console.log("Components!");http://localhost:3000/profile
     // console.log(this.props)
     axios.get("http://whim-travel.co/flight-search").then(data =>
       this.setState({
