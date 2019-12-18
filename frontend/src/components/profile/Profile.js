@@ -47,13 +47,15 @@ class Profile extends Component {
   };
 
   showMyTrips = () => {
-    return this.state.user.trips.map((eachTrip, index) => {
-      return (
-        <li key={index}>
-          <Link to={`/mytrips/${eachTrip}`}>{eachTrip}</Link>
-        </li>
-      );
-    });
+    if (this.state.user.trips) {
+      return this.state.user.trips.map((eachTrip, index) => {
+        return (
+          <li key={index}>
+            <Link to={`/mytrips/${eachTrip}`}>{eachTrip}</Link>
+          </li>
+        );
+      });
+    }
   };
 
   showMyFlights = () => {
