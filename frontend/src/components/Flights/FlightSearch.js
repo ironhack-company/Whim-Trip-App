@@ -89,7 +89,7 @@ export class FlightSearch extends Component {
         airport.city.toUpperCase() == cityFrom ||
         airport.iata_code == cityFrom
       );
-    });
+    }); 
 
     let from = airportFrom ? airportFrom.iata_code : cityFrom;
 
