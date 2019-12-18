@@ -91,6 +91,8 @@ export class FlightSearch extends Component {
       );
     });
 
+    console.log(airportFrom)
+
     let from = airportFrom ? airportFrom.iata_code : cityFrom;
 
     const RAPIDAPI_API_URL = `https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=${from ||
@@ -183,28 +185,57 @@ export class FlightSearch extends Component {
     console.log(this.state.flights);
   };
 
+  findName = (code) => {
+    let airport = airports.find(air => air.iata_code == code)
+    console.log(airport)
+    if (airport) {
+      return airport.city;
+    } else {
+      return code
+    }
+  }
+
+  // showOrigin = (flights) => {
+  //   console.log(this.state.flights.origin)
+  //   return flights.map((segment,i)=> {
+  //     return ( 
+  //       <ul> 
+  //       <li>{this.findName(segment.origin)}</li>
+  //       </ul>
+  //     )
+  //   })
+  // }
+
+  showDestination = () => {
+    // console.log(this.state.flights)
+    return this.state.flights.map((segment, i) => {
+
+
+      console.log("This is the destination", segment.destination)
+
+
+      if (segment.destination) {
+        return (
+          <ul key={i}>
+            {/* <li>Origin: {this.findName(segment.origin)}</li> */}
+            <li>Destination: {this.findName(segment.destination)}</li>
+          </ul>
+        )
+      }
+    })
+  }
+
 
   showFlights = () => {
+
+
     return this.state.filteredFlights.map((flight, index) => {
       console.log(flight);
-      let destinationAirport = flight.destination;
-      console.log(destinationAirport)
-      let destinationCity = airports.find(city => {
-        return (
-          city.iata_code == destinationAirport
-        )
-      })
+      let destinationCity = airports.find(port => port.iata_code == flight.destination)
+      let originCity = airports.find(port => port.iata_code == flight.origin)
 
-      let theDestination
-      
-      destinationCity ? theDestination = destinationCity.city 
-      : theDestination = destinationCity
-
-      console.log(theDestination)
-      this.setState({
-        DestinationCityName: theDestination
-      })
-      
+      let fullDestination = destinationCity.city
+      let fullOrigin = originCity.city
       return (
         <div className="flight flex" key={index}>
           <div className="flight-buy">
@@ -220,7 +251,7 @@ export class FlightSearch extends Component {
                   }
                 }}
               >
-                Check prices to {flight.destination}
+                Check prices to {fullDestination}
               </Link>
             </button>
             <button onClick={e => this.saveFlight(e, flight)}>
@@ -231,29 +262,33 @@ export class FlightSearch extends Component {
           <div className="flight-info flex">
             <div>
               {/* <h3></h3> */}
-              <span>{flight.origin}</span>
+              <span>{fullOrigin}</span>
               <span className="gray">
-                {/* { departure } */}
-                {flight.departureDate}
+                Inbound
               </span>
             </div>
             <div>
               <span className="gray">
-                {/* {keyName.MinPrice} */}
                 🛫
               </span>
+              <span className="gray">
+                {flight.departureDate}
+              </span>
+
+
             </div>
             <div>
-              {/* <h3></h3> */}
-              <span>{flight.destination}</span>
-              <span className="gray">{flight.returnDate}</span>
+             
+              {fullDestination}
+
+              <span className="gray">Inbound</span>
             </div>
           </div>
 
           <div className="flight-info2 flex2">
             <div>
               {/* <h3></h3> */}
-              <span>{flight.destination}</span>
+              <span>{fullDestination}</span>
               <span className="gray">
                 {/* { departure } */}
                 Outbound
@@ -264,10 +299,13 @@ export class FlightSearch extends Component {
                 {/* {keyName.MinPrice} USD */}
                 🛬
               </span>
+              <span className="gray">
+                {flight.returnDate}
+              </span>
             </div>
             <div>
               {/* <h3></h3> */}
-              <span>{flight.origin}</span>
+              <span>{fullOrigin}</span>
               <span className="gray">Outbound</span>
             </div>
           </div>
@@ -282,7 +320,6 @@ export class FlightSearch extends Component {
   };
 
   render() {
-    console.log(this.state)
     const { loading, userLocation } = this.state;
     const { google } = this.props;
 
