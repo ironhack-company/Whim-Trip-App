@@ -89,9 +89,7 @@ export class FlightSearch extends Component {
         airport.city.toUpperCase() == cityFrom ||
         airport.iata_code == cityFrom
       );
-    });
-
-    console.log(airportFrom)
+    }); 
 
     let from = airportFrom ? airportFrom.iata_code : cityFrom;
 
@@ -195,122 +193,143 @@ export class FlightSearch extends Component {
     }
   }
 
-  // showOrigin = (flights) => {
-  //   console.log(this.state.flights.origin)
-  //   return flights.map((segment,i)=> {
-  //     return ( 
-  //       <ul> 
-  //       <li>{this.findName(segment.origin)}</li>
-  //       </ul>
-  //     )
+  // showDestination = () => {
+  //   // console.log(this.state.flights)
+  //   return this.state.flights.map((segment, i) => {
+
+  //     console.log("This is the destination", segment.destination)
+
+  //     if (segment.destination) {
+  //       return (
+  //         <ul key={i}>
+  //           {/* <li>Origin: {this.findName(segment.origin)}</li> */}
+  //           <li>Destination: {this.findName(segment.destination)}</li>
+  //         </ul>
+  //       )
+  //     }
   //   })
   // }
 
-  showDestination = () => {
-    // console.log(this.state.flights)
-    return this.state.flights.map((segment, i) => {
-
-
-      console.log("This is the destination", segment.destination)
-
-
-      if (segment.destination) {
-        return (
-          <ul key={i}>
-            {/* <li>Origin: {this.findName(segment.origin)}</li> */}
-            <li>Destination: {this.findName(segment.destination)}</li>
-          </ul>
-        )
-      }
-    })
-  }
 
 
   showFlights = () => {
-
-
     return this.state.filteredFlights.map((flight, index) => {
       console.log(flight);
-      let destinationCity = airports.find(port => port.iata_code == flight.destination)
-      let originCity = airports.find(port => port.iata_code == flight.origin)
+      let destinationAirport = flight.destination;
+      console.log(destinationAirport)
+      let destinationCity = airports.find(city => {
+        return (
+          city.iata_code == destinationAirport
+        )
+      })
 
-      let fullDestination = destinationCity.city
-      let fullOrigin = originCity.city
-      return (
-        <div className="flight flex" key={index}>
-          <div className="flight-buy">
-            <button>
-              <Link
-                to={{
-                  pathname: "/check-prices",
-                  props: {
-                    flightLink: flight.links.flightOffers,
-                    user: this.props.user,
-                    headers: this.props.headers,
-                    destination: flight.destination
-                  }
-                }}
-              >
-                Check prices to {fullDestination}
-              </Link>
-            </button>
-            <button onClick={e => this.saveFlight(e, flight)}>
-              Save this flight
-            </button>
-            <p>{flight.price.total} USD</p>
-          </div>
-          <div className="flight-info flex">
-            <div>
-              {/* <h3></h3> */}
-              <span>{fullOrigin}</span>
-              <span className="gray">
-                Inbound
-              </span>
+      let theDestination
+      
+      destinationCity ? theDestination = destinationCity.city 
+      : theDestination = destinationCity
+      console.log(destinationCity)
+      console.log(theDestination)
+      // this.setState({
+      //   DestinationCityName: theDestination
+      // })
+      if (destinationCity){
+        return (
+          <div className="flight flex" key={index}>
+            {/* <h1>{this.showDestination()}</h1> */}
+            <div className="flight-buy">
+              <button>
+              {destinationCity._geoloc &&
+                <Link
+                  to={{
+                    pathname: "/check-prices",
+                    props: {
+                      flightLink: flight.links.flightOffers,
+                      user: this.props.user,
+                      headers: this.props.headers,
+                      destination: theDestination,
+                      destinationLocation: destinationCity._geoloc
+                    
+                    }
+                  }}
+                >
+                  Check prices to {this.findName(flight.destination)}
+                </Link>
+              }
+
+              {!destinationCity._geoloc &&
+                <Link
+                  to={{
+                    pathname: "/check-prices",
+                    props: {
+                      flightLink: flight.links.flightOffers,
+                      user: this.props.user,
+                      headers: this.props.headers,
+                      destination: theDestination,
+         
+                    }
+                  }}
+                >
+                  Check prices to {this.findName(flight.destination)}
+                </Link>
+            }
+              </button>
+              <button onClick={e => this.saveFlight(e, flight)}>
+                Save this flight
+              </button>
+              <p>{flight.price.total} USD</p>
             </div>
-            <div>
-              <span className="gray">
-                🛫
-              </span>
-              <span className="gray">
-                {flight.departureDate}
-              </span>
+            <div className="flight-info flex">
+              <div>
+                {/* <h3></h3> */}
+                <span>{this.findName(flight.origin)}</span>
+                <span className="gray">
+                  {/* { departure } */}
+                  Inbound
+                </span>
+              </div>
+              <div>
+                <span className="gray">
+                  🛫
+                </span>
+                <span className="gray">
+                  {flight.departureDate}
 
-
+                </span>
+              </div>
+              <div>
+                <span>{this.findName(flight.destination)}</span>
+                <span className="gray">
+                 Inbound
+                  </span>
+              </div>
             </div>
-            <div>
-             
-              {fullDestination}
+  
+            <div className="flight-info2 flex2">
+              <div>
+                {/* <h3></h3> */}
+                <span>{this.findName(flight.destination)}</span>
+                <span className="gray">
 
-              <span className="gray">Inbound</span>
-            </div>
-          </div>
-
-          <div className="flight-info2 flex2">
-            <div>
-              {/* <h3></h3> */}
-              <span>{fullDestination}</span>
-              <span className="gray">
-                {/* { departure } */}
-                Outbound
-              </span>
-            </div>
-            <div>
-              <span className="gray">
-                {/* {keyName.MinPrice} USD */}
-                🛬
-              </span>
-              <span className="gray">
+                  Outbound
+                </span>
+              </div>
+              <div>
+                <span className="gray">
+                  🛬
+                </span>
+                <span className="gray">
                 {flight.returnDate}
-              </span>
-            </div>
-            <div>
-              {/* <h3></h3> */}
-              <span>{fullOrigin}</span>
-              <span className="gray">Outbound</span>
+                </span>
+              </div>
+              <div>
+                <span>{this.findName(flight.origin)}</span>
+                <span className="gray">Outbound</span>
+              </div>
             </div>
           </div>
-        </div>
-      );
+        );
+      }
+      
     });
   };
 
@@ -320,6 +339,7 @@ export class FlightSearch extends Component {
   };
 
   render() {
+    console.log(this.state)
     const { loading, userLocation } = this.state;
     const { google } = this.props;
 

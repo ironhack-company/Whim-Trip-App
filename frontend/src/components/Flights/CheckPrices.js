@@ -184,7 +184,9 @@ export default class CheckPrices extends Component {
                 to={{
                   pathname: "/flight-details",
                   flight: { flight },
-                  user: this.props.location.props.user
+                  user: this.props.location.props.user,
+                  destination: this.props.location.props.destination,
+                  destinationLocation: this.props.location.props.destinationLocation
                 }}
               >
                 Book flight
