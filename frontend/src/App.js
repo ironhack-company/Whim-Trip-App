@@ -70,31 +70,31 @@ class App extends Component {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
-              <NavLink to="/" className="mr-2 text-dark">
+              <NavLink to="/" className="mr-4 text-dark">
                 Home
               </NavLink>
               {this.state.email ? (
                 <Fragment>
-                  <NavItem className="mr-2  text-dark">
+                  <NavItem className="mr-4  text-dark">
                     Logged in as {this.state.username}
                   </NavItem>
-                  <NavLink className="mr-2 text-dark" to="/flight-search">
+                  <NavLink className="mr-4 text-dark" to="/flight-search">
                     Flight inspiration
                   </NavLink>
-                  <NavLink className="mr-2 text-dark" to="/cheap-flights">
+                  <NavLink className="mr-4 text-dark" to="/cheap-flights">
                     Search flights
                   </NavLink>
-                  <NavLink className="mr-2 text-dark" to="/hotel-search">
+                  <NavLink className="mr-4 text-dark" to="/hotel-search">
                     Hotels
                   </NavLink>
-                  <NavLink className="mr-2 text-dark" to="/dashboard">
+                  <NavLink className="mr-4 text-dark" to="/dashboard">
                     Dashboard
                   </NavLink>
-                  <NavLink className="mr-2 text-dark" to="/profile">
+                  <NavLink className="mr-4 text-dark" to="/profile">
                     Profile
                   </NavLink>
                   <NavLink
-                    className="mar-2 text-dark"
+                    className="mr-4 text-dark"
                     onClick={this.logOut}
                     to="/"
                   >
@@ -103,10 +103,10 @@ class App extends Component {
                 </Fragment>
               ) : (
                 <Fragment>
-                  {/* <NavLink className="mr-2 text-dark" to="/sign-up">
+                  {/* <NavLink className="mr-4 text-dark" to="/sign-up">
                     Sign Up
                   </NavLink> */}
-                  <NavLink className="mr-2 text-dark" to="/log-in">
+                  <NavLink className="mr-4 text-dark" to="/log-in">
                     Log In
                   </NavLink>
                 </Fragment>

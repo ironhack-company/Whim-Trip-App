@@ -1,8 +1,12 @@
+
 body {
-    margin: 10px 0;
+    margin: 0;
     padding: 0;
     font-family: "Arial";
-    background-color: #f3f7fa;
+    /* background-color: #f3f7fa; */
+    background-color: #edf1f4;
+background-image: url("https://www.transparenttextures.com/patterns/foggy-birds.png");
+
   }
   
   
@@ -177,9 +181,10 @@ body {
   }
   
   .flight {
-    margin: 10px auto 0;
+    margin: 20px auto 0;
     min-width: 320px;
     max-width: 600px;
+    max-height: 230px;
     background-color: #fff;
     border-radius: 4px;
     box-shadow: 0 2px 5px 0px #dbe6ec;
@@ -230,6 +235,7 @@ body {
     /* padding-top: 28px; */
     position: relative;
     left: 104px;
+    bottom: 67px;
     /* top: 15px; */
     /* bottom: 19px; */
   }
@@ -240,7 +246,7 @@ body {
     border: 0px solid #ccc;
   }
   .flight-info2 div:nth-child(2) {
-    padding-top: 25px;
+    padding-top: 11px;
     text-align: center;
   }
   .flight-info2 div:last-child {
