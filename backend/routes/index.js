@@ -4,11 +4,6 @@ const User    = require('../models/User');
 const Trip  = require('../models/Trip');
 const Airport  = require('../models/Airport');
 
-
-
-
-
-
 router.get('/mytrips/:id', (req, res, next)=>{
 
   // console.log(req.params.id)

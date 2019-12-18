@@ -33,7 +33,7 @@ export class FlightSearch extends Component {
   };
   componentDidMount() {
     console.log(airports);
-    console.log("Components!");
+    console.log("Components!");http://localhost:3000/profile
     // console.log(this.props)
     axios.get("http://whim-travel.co/flight-search").then(data =>
       this.setState({
@@ -183,6 +183,34 @@ export class FlightSearch extends Component {
     console.log(this.state.flights);
   };
 
+  findName = (code) => {
+    let airport = airports.find(air => air.iata_code == code)
+    console.log(airport)
+    if (airport) {
+      return airport.city;
+    } else {
+      return code
+    }
+  }
+
+  // showDestination = () => {
+  //   // console.log(this.state.flights)
+  //   return this.state.flights.map((segment, i) => {
+
+  //     console.log("This is the destination", segment.destination)
+
+  //     if (segment.destination) {
+  //       return (
+  //         <ul key={i}>
+  //           {/* <li>Origin: {this.findName(segment.origin)}</li> */}
+  //           <li>Destination: {this.findName(segment.destination)}</li>
+  //         </ul>
+  //       )
+  //     }
+  //   })
+  // }
+
+
 
   showFlights = () => {
     return this.state.filteredFlights.map((flight, index) => {
@@ -207,6 +235,7 @@ export class FlightSearch extends Component {
       if (destinationCity){
         return (
           <div className="flight flex" key={index}>
+            {/* <h1>{this.showDestination()}</h1> */}
             <div className="flight-buy">
               <button>
               {destinationCity._geoloc &&
@@ -223,7 +252,7 @@ export class FlightSearch extends Component {
                     }
                   }}
                 >
-                  Check prices to {flight.destination}
+                  Check prices to {this.findName(flight.destination)}
                 </Link>
               }
 
@@ -240,7 +269,7 @@ export class FlightSearch extends Component {
                     }
                   }}
                 >
-                  Check prices to {flight.destination}
+                  Check prices to {this.findName(flight.destination)}
                 </Link>
             }
               </button>
@@ -252,43 +281,48 @@ export class FlightSearch extends Component {
             <div className="flight-info flex">
               <div>
                 {/* <h3></h3> */}
-                <span>{flight.origin}</span>
+                <span>{this.findName(flight.origin)}</span>
                 <span className="gray">
                   {/* { departure } */}
-                  {flight.departureDate}
+                  Inbound
                 </span>
               </div>
               <div>
                 <span className="gray">
-                  {/* {keyName.MinPrice} */}
                   🛫
+                </span>
+                <span className="gray">
+                  {flight.departureDate}
+
                 </span>
               </div>
               <div>
-                {/* <h3></h3> */}
-                <span>{flight.destination}</span>
-                <span className="gray">{flight.returnDate}</span>
+                <span>{this.findName(flight.destination)}</span>
+                <span className="gray">
+                 Inbound
+                  </span>
               </div>
             </div>
   
             <div className="flight-info2 flex2">
               <div>
                 {/* <h3></h3> */}
-                <span>{flight.destination}</span>
+                <span>{this.findName(flight.destination)}</span>
                 <span className="gray">
-                  {/* { departure } */}
+
                   Outbound
                 </span>
               </div>
               <div>
                 <span className="gray">
-                  {/* {keyName.MinPrice} USD */}
                   🛬
+                </span>
+                <span className="gray">
+                {flight.returnDate}
                 </span>
               </div>
               <div>
-                {/* <h3></h3> */}
-                <span>{flight.origin}</span>
+                <span>{this.findName(flight.origin)}</span>
                 <span className="gray">Outbound</span>
               </div>
             </div>
