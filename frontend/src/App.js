@@ -165,7 +165,8 @@ class App extends Component {
            <Route
             exact
             path="/dashboard"
-            render={props => <TripDashboard {...props} user={this.state} />}
+            component={TripDashboard}
+            render={props => <TripDashboard {...props} setUser={this.setUser} user={this.state} />}
           />
           <Route
             exact

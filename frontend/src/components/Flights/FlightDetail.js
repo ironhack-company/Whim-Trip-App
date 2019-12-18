@@ -178,6 +178,7 @@ export default class FlightDetail extends Component {
   render() {
     console.log(this.props.location.flight.flight.offerItems[0]);
     console.log(this.state);
+    console.log(this.props)
     return (
       <div>
         <h2>Your flight detail</h2>
@@ -238,7 +239,11 @@ export default class FlightDetail extends Component {
                 onChange={this.handleChange}
               />
             </Form.Group>
-            <Link to={{ pathname: "/check-prices" }}>
+            <Link to={{pathname: "/dashboard",
+            myFlight: this.state.selectedFlight,
+            user: this.props.location.user
+            }}
+            >
               <Button
                 id="submit"
                 type="submit"

@@ -6,7 +6,7 @@ import "./FlightSearch2.css";
 
 import { Link, Redirect } from "react-router-dom";
 import Loader from "react-loader-spinner";
-import airports from '../../data/airports';
+import airports from "../../data/airports";
 
 export class FlightSearch extends Component {
   state = {
@@ -32,7 +32,7 @@ export class FlightSearch extends Component {
     ]
   };
   componentDidMount() {
-    console.log(airports)
+    console.log(airports);
     console.log("Components!");
     // console.log(this.props)
     axios.get("http://whim-travel.co/flight-search").then(data =>
@@ -80,20 +80,21 @@ export class FlightSearch extends Component {
   };
 
   getFlights = () => {
-
-    let cityFrom = this.state.searchQuery
-
-
+    let cityFrom = this.state.searchQuery;
 
     let airportFrom = airports.find(airport => {
-      return (airport.city.toLowerCase() == cityFrom || airport.iata_code == cityFrom) // airport.state == cityFrom ||
-    })
+      return (
+        airport.city == cityFrom ||
+        airport.city.toLowerCase() == cityFrom ||
+        airport.city.toUpperCase() == cityFrom ||
+        airport.iata_code == cityFrom
+      );
+    });
 
+    let from = airportFrom ? airportFrom.iata_code : cityFrom;
 
-    let from = airportFrom ? airportFrom.iata_code : cityFrom
-
-
-    const RAPIDAPI_API_URL = `https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=${from || this.state.searchCode}`; // if you fetch in componentDidMount it returns error because there is no origin when the page is loaded
+    const RAPIDAPI_API_URL = `https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=${from ||
+      this.state.searchCode}`; // if you fetch in componentDidMount it returns error because there is no origin when the page is loaded
     console.log(this);
     axios
       .get(RAPIDAPI_API_URL, { headers: this.props.headers }) //use token to get data
@@ -182,9 +183,28 @@ export class FlightSearch extends Component {
     console.log(this.state.flights);
   };
 
+
   showFlights = () => {
     return this.state.filteredFlights.map((flight, index) => {
       console.log(flight);
+      let destinationAirport = flight.destination;
+      console.log(destinationAirport)
+      let destinationCity = airports.find(city => {
+        return (
+          city.iata_code == destinationAirport
+        )
+      })
+
+      let theDestination
+      
+      destinationCity ? theDestination = destinationCity.city 
+      : theDestination = destinationCity
+
+      console.log(theDestination)
+      this.setState({
+        DestinationCityName: theDestination
+      })
+      
       return (
         <div className="flight flex" key={index}>
           <div className="flight-buy">
@@ -195,7 +215,8 @@ export class FlightSearch extends Component {
                   props: {
                     flightLink: flight.links.flightOffers,
                     user: this.props.user,
-                    headers: this.props.headers
+                    headers: this.props.headers,
+                    destination: flight.destination
                   }
                 }}
               >
@@ -261,6 +282,7 @@ export class FlightSearch extends Component {
   };
 
   render() {
+    console.log(this.state)
     const { loading, userLocation } = this.state;
     const { google } = this.props;
 
