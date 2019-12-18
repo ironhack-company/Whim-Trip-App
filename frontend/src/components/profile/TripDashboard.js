@@ -1,12 +1,22 @@
 import React, { Component } from 'react'
+import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
+import Loader from "react-loader-spinner";
 
-export default class TripDashboard extends Component {
+class TripDashboard extends Component {
+    
+    state = {
+        userLocation: { lat: 32, lng: 32 },
+        loading: true,
+        showingInfoWindow: false,
+        activeMarker: {},
+        selectedPlace: {},
+    }
 
 componentDidMount(){
     const script = document.createElement("script")
     script.src = '//aff.bstatic.com/static/affiliate_base/js/flexiproduct.js';
     script.async = true;
-
+    console.log()
     document.body.appendChild(script)
     }
 
@@ -21,7 +31,22 @@ getDestination = () => {
 
     render() {
         console.log(this.props)
-        
+        // const { loading, userLocation } = this.state;
+        const { google } = this.props;
+    
+        // if (loading) {
+        //   return (
+        //     <Loader
+        //       type="Plane"
+        //       color="#00BFFF"
+        //       height={100}
+        //       width={100}
+        //       timeout={3000} //3 secs
+        //       className="loader"
+        //     />
+        //   );
+        //   //return null;
+        // }
         return (
             <div>
                 My Trip to {this.getDestination()}
@@ -38,9 +63,28 @@ getDestination = () => {
                         </ins>
 
                </div>
+                
+                <div className="mapDiv col">
+                    <Map google={google} initialCenter={this.props.location.destinationLocation} zoom={10}>
+                    <Marker onClick={this.onMarkerClick} name={"Current location"} />
+                    {/* {this.getLocationData()} */}
+                    <InfoWindow
+                        marker={this.state.activeMarker}
+                        visible={this.state.showingInfoWindow}
+                    >
+                        <div>
+                        <h1>{this.state.selectedPlace.name}</h1>
+                        </div>
+                    </InfoWindow>
+                    </Map>
+                </div>
+            
             </div>
         )
     }
 }
 
+export default GoogleApiWrapper({
+    apiKey: "AIzaSyC_Ryd8LuP-hChe7SPdvM_naB5ofhdF2QQ"
+  })(TripDashboard);
 
