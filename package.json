@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/ironhack-company/final-project-backend/issues"
   },
-  "homepage": "https://github.com/ironhack-company/final-project-backend#readme"
+  "homepage": "https://github.com/ironhack-company/final-project-backend#readme",
+  "dependencies": {
+    "moment": "^2.24.0"
+  }
 }
