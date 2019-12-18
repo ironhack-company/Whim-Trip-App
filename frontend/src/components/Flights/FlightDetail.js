@@ -148,7 +148,7 @@ export default class FlightDetail extends Component {
 
   handleSubmit = e => {
     console.log("handling submit");
-    e.preventDefault();
+    // e.preventDefault();
     console.log(this.props);
     let copyUser = this.props.location.user;
     console.log(copyUser);
