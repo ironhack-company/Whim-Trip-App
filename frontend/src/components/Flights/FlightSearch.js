@@ -199,80 +199,103 @@ export class FlightSearch extends Component {
       
       destinationCity ? theDestination = destinationCity.city 
       : theDestination = destinationCity
-
+      console.log(destinationCity)
       console.log(theDestination)
-      this.setState({
-        DestinationCityName: theDestination
-      })
-      
-      return (
-        <div className="flight flex" key={index}>
-          <div className="flight-buy">
-            <button>
-              <Link
-                to={{
-                  pathname: "/check-prices",
-                  props: {
-                    flightLink: flight.links.flightOffers,
-                    user: this.props.user,
-                    headers: this.props.headers,
-                    destination: flight.destination
-                  }
-                }}
-              >
-                Check prices to {flight.destination}
-              </Link>
-            </button>
-            <button onClick={e => this.saveFlight(e, flight)}>
-              Save this flight
-            </button>
-            <p>{flight.price.total} USD</p>
-          </div>
-          <div className="flight-info flex">
-            <div>
-              {/* <h3></h3> */}
-              <span>{flight.origin}</span>
-              <span className="gray">
-                {/* { departure } */}
-                {flight.departureDate}
-              </span>
-            </div>
-            <div>
-              <span className="gray">
-                {/* {keyName.MinPrice} */}
-                🛫
-              </span>
-            </div>
-            <div>
-              {/* <h3></h3> */}
-              <span>{flight.destination}</span>
-              <span className="gray">{flight.returnDate}</span>
-            </div>
-          </div>
+      // this.setState({
+      //   DestinationCityName: theDestination
+      // })
+      if (destinationCity){
+        return (
+          <div className="flight flex" key={index}>
+            <div className="flight-buy">
+              <button>
+              {destinationCity._geoloc &&
+                <Link
+                  to={{
+                    pathname: "/check-prices",
+                    props: {
+                      flightLink: flight.links.flightOffers,
+                      user: this.props.user,
+                      headers: this.props.headers,
+                      destination: theDestination,
+                      destinationLocation: destinationCity._geoloc
+                    
+                    }
+                  }}
+                >
+                  Check prices to {flight.destination}
+                </Link>
+              }
 
-          <div className="flight-info2 flex2">
-            <div>
-              {/* <h3></h3> */}
-              <span>{flight.destination}</span>
-              <span className="gray">
-                {/* { departure } */}
-                Outbound
-              </span>
+              {!destinationCity._geoloc &&
+                <Link
+                  to={{
+                    pathname: "/check-prices",
+                    props: {
+                      flightLink: flight.links.flightOffers,
+                      user: this.props.user,
+                      headers: this.props.headers,
+                      destination: theDestination,
+         
+                    }
+                  }}
+                >
+                  Check prices to {flight.destination}
+                </Link>
+            }
+              </button>
+              <button onClick={e => this.saveFlight(e, flight)}>
+                Save this flight
+              </button>
+              <p>{flight.price.total} USD</p>
             </div>
-            <div>
-              <span className="gray">
-                {/* {keyName.MinPrice} USD */}
-                🛬
-              </span>
+            <div className="flight-info flex">
+              <div>
+                {/* <h3></h3> */}
+                <span>{flight.origin}</span>
+                <span className="gray">
+                  {/* { departure } */}
+                  {flight.departureDate}
+                </span>
+              </div>
+              <div>
+                <span className="gray">
+                  {/* {keyName.MinPrice} */}
+                  🛫
+                </span>
+              </div>
+              <div>
+                {/* <h3></h3> */}
+                <span>{flight.destination}</span>
+                <span className="gray">{flight.returnDate}</span>
+              </div>
             </div>
-            <div>
-              {/* <h3></h3> */}
-              <span>{flight.origin}</span>
-              <span className="gray">Outbound</span>
+  
+            <div className="flight-info2 flex2">
+              <div>
+                {/* <h3></h3> */}
+                <span>{flight.destination}</span>
+                <span className="gray">
+                  {/* { departure } */}
+                  Outbound
+                </span>
+              </div>
+              <div>
+                <span className="gray">
+                  {/* {keyName.MinPrice} USD */}
+                  🛬
+                </span>
+              </div>
+              <div>
+                {/* <h3></h3> */}
+                <span>{flight.origin}</span>
+                <span className="gray">Outbound</span>
+              </div>
             </div>
           </div>
-        </div>
-      );
+        );
+      }
+      
     });
   };
 

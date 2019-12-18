@@ -241,7 +241,9 @@ export default class FlightDetail extends Component {
             </Form.Group>
             <Link to={{pathname: "/dashboard",
             myFlight: this.state.selectedFlight,
-            user: this.props.location.user
+            user: this.props.location.user,
+            destination: this.props.location.destination,
+            destinationLocation: this.props.location.destinationLocation
             }}
             >
               <Button
