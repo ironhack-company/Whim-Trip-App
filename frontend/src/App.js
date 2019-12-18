@@ -73,6 +73,8 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state.email);
+    console.log(this.state.user);
     return (
       <BrowserRouter>
         <Navbar bg="light" expand="lg">

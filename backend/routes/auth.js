@@ -43,13 +43,13 @@ function isAuth(req, res, next) {
     : res.status(401).json({ msg: "Log in first" });
 }
 
-router.patch("/edit-email", (req, res) => {
+router.post("/edit-email", (req, res) => {
   console.log(req.user, "<<<<<<<<<");
   User.findByIdAndUpdate(
     req.user._id,
     { email: req.body.email },
     { new: true }
-  ).than(data => {
+  ).then(data => {
     res.json(data);
   });
 });
