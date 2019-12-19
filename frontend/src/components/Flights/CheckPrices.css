@@ -1,4 +1,14 @@
-.loader {
+.leg {
+  border-bottom: 1px dotted gray;
+  background: lightgray;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  width: 90%;
+  background: lightgray;
+  border-radius: 5px;
+  box-sizing: content-box;
+}
+*/ .loader {
   position: absolute;
   top: 40vh;
   right: 40vw;
@@ -74,4 +84,4 @@ a:hover {
   background: lightgray;
   border-radius: 5px;
   box-sizing: content-box;
-}
+} d

@@ -152,7 +152,7 @@ class TripDashboard extends Component {
       return (
         <div>
           My Trip to {this.state.cityName}
-          <h2>Input Passenger Detail</h2>
+          <h2></h2>
           <form onSubmit={this.handleSubmit}>
             <Form.Group as={Col} md="6">
               <Form.Label>First Name:</Form.Label>
