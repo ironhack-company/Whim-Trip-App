@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import axios from "axios";
 import Loader from "react-loader-spinner";
 import { Link, Redirect } from "react-router-dom";
+import "./CheckPrices.css";
 
 export default class CheckPrices extends Component {
   constructor(props) {
@@ -14,8 +15,8 @@ export default class CheckPrices extends Component {
 
   componentDidMount() {
     console.log("Component mounted");
-    console.log(this.props.location.user)
-    console.log(this.props)
+    console.log(this.props.location.user);
+    console.log(this.props);
     this.getPrices();
   }
 
@@ -55,13 +56,12 @@ export default class CheckPrices extends Component {
   displayPrices = () => {
     console.log("calling display prices");
     if (this.state.flightData) {
-      console.log(this.state.flightData)
-      let sorted = this.state.flightData.sort(function(a,b){
-        return a.offerItems[0].price.total - b.offerItems[0].price.total
-      })
-      console.log(sorted)
-      return this.state.flightData.splice(0,5).map((flight, i) => {
-       
+      console.log(this.state.flightData);
+      let sorted = this.state.flightData.sort(function(a, b) {
+        return a.offerItems[0].price.total - b.offerItems[0].price.total;
+      });
+      console.log(sorted);
+      return this.state.flightData.splice(0, 5).map((flight, i) => {
         console.log(flight);
         let outboundFlight = flight.offerItems[0].services[0];
         let returnFlight = flight.offerItems[0].services[1];
@@ -186,7 +186,8 @@ export default class CheckPrices extends Component {
                   flight: { flight },
                   user: this.props.location.props.user,
                   destination: this.props.location.props.destination,
-                  destinationLocation: this.props.location.props.destinationLocation
+                  destinationLocation: this.props.location.props
+                    .destinationLocation
                 }}
               >
                 Book flight
@@ -198,22 +199,21 @@ export default class CheckPrices extends Component {
     }
   };
 
-
-
   render() {
-    console.log(this.props)
-    // const loading = this.state;
-    // if (loading) {
-    //   return (
-    //     <Loader
-    //       type="Plane"
-    //       color="#00BFFF"
-    //       height={100}
-    //       width={100}
-    //       timeout={3000} //3 secs
-    //     />
-    //   );
-    // }
+    console.log(this.props);
+    const { loading } = this.state;
+    if (loading) {
+      return (
+        <Loader
+          type="Plane"
+          color="#00BFFF"
+          height={100}
+          width={100}
+          timeout={6000} //6 secs
+          className="loader"
+        />
+      );
+    }
     return <Fragment>{this.displayPrices()}</Fragment>;
   }
 }
