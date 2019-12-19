@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 import Loader from "react-loader-spinner";
+import axios from "axios"
 
 class TripDashboard extends Component {
     
@@ -18,6 +19,12 @@ componentDidMount(){
     script.async = true;
     console.log()
     document.body.appendChild(script)
+
+    axios.get("https://maps.googleapi.com/maps/api/place/textsearch/json?query=new+york+city+point+of+interest&language=en&key=AIzaSyC_Ryd8LuP-hChe7SPdvM_naB5ofhdF2QQ").then(data =>
+        this.setState({
+          pointsOfInterest: data.data
+        })
+      );
     }
 
 
@@ -31,6 +38,7 @@ getDestination = () => {
 
     render() {
         console.log(this.props)
+        console.log(this.state)
         // const { loading, userLocation } = this.state;
         const { google } = this.props;
     

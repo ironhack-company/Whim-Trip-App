@@ -8,7 +8,7 @@ const tripSchema = new Schema({
     location: String,
     startDate: Date,
     endDate: Date,
-    pictures: [String],
+
 
 })
 
