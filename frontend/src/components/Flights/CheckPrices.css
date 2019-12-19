@@ -1,5 +1,41 @@
 .loader {
-    position: absolute;
-    top: 40vh;
-    right: 40vw;
+  position: absolute;
+  top: 40vh;
+  right: 40vw;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flight-container {
+  padding: 1rem;
+  margin: 1rem;
+  box-sizing: border-box;
+  background: #ffffff;
+}
+
+.flight-item {
+  flex-grow: 1;
+}
+
+.first-flight {
+  border-bottom: 1px dotted gray;
+}
+
+.btn-select {
+  background-color: #ff6d00;
+  color: #fff;
+  /* border: 0;
+  border-bottom: 1px solid #d64d08;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px 0 #e7e7e7; */
+}
+
+a {
+  color: #fff !important;
+}
+a:hover {
+  text-decoration: none !important;
 }

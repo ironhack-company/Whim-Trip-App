@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from "react";
 import axios from "axios";
-import Loader from "react-loader-spinner";
-import { Link, Redirect } from "react-router-dom";
 import "./CheckPrices.css";
+import Loader from "react-loader-spinner";
+import { Link } from "react-router-dom";
+import { Container, Col } from "react-bootstrap";
 
 export default class CheckPrices extends Component {
   constructor(props) {
@@ -71,129 +72,142 @@ export default class CheckPrices extends Component {
         if (outboundFlight.segments.length > 1) {
           firstRender = (
             <>
-              <li>
+              <div className="flight-item">
                 From
                 {outboundFlight.segments[1].flightSegment.departure.iataCode}
-              </li>
-              <li>
+                {outboundFlight.segments[1].flightSegment.departure.at}
+              </div>
+              <div className="flight-item">
                 To
                 {outboundFlight.segments[1].flightSegment.arrival.iataCode}
-              </li>
-              <li>
+                {outboundFlight.segments[1].flightSegment.arrival.at}
+              </div>
+              <div className="flight-item">
                 Carrier
                 {outboundFlight.segments[1].flightSegment.operating.carrierCode}
-              </li>
-              <li>
+              </div>
+              <div className="flight-item">
                 Duration
                 {outboundFlight.segments[1].flightSegment.duration}
-              </li>
+              </div>
             </>
           );
         }
         if (returnFlight.segments.length > 1) {
           secondRender = (
             <>
-              <li>
+              <div className="flight-item">
                 From
                 {returnFlight.segments[1].flightSegment.departure.iataCode}
-              </li>
-              <li>
+                {returnFlight.segments[1].flightSegment.departure.at}
+              </div>
+              <div className="flight-item">
                 To
                 {returnFlight.segments[1].flightSegment.arrival.iataCode}
-              </li>
-              <li>
+                {returnFlight.segments[1].flightSegment.arrival.at}
+              </div>
+              <div className="flight-item">
                 Carrier
                 {returnFlight.segments[1].flightSegment.operating.carrierCode}
-              </li>
-              <li>
+              </div>
+              <div className="flight-item">
                 Duration
                 {returnFlight.segments[1].flightSegment.duration}
-              </li>
+              </div>
             </>
           );
         }
+
         return (
-          <ul key={i}>
-            <div>
-              <div className="outbound-container">
-                <li>Price {flight.offerItems[0].price.total} </li>
-                <li>Tax {flight.offerItems[0].price.totalTaxes} </li>
-                <li>
-                  From
-                  {outboundFlight.segments[0].flightSegment.departure.iataCode}
-                </li>
-                <li>
-                  To
-                  {outboundFlight.segments[0].flightSegment.arrival.iataCode}
-                </li>
-                <li>
-                  Carrier
-                  {
-                    outboundFlight.segments[0].flightSegment.operating
-                      .carrierCode
-                  }
-                </li>
-                <li>
-                  Duration
-                  {outboundFlight.segments[0].flightSegment.duration}
-                </li>
-                {firstRender}
+          <div
+            className="flight-container flex-container rounded border border-light"
+            key={i}
+          >
+            <div className="flight-schedule">
+              <div className="outbound-container flex-container">
+                <div className="first-flight">
+                  <div className="flight-item">
+                    From
+                    {
+                      outboundFlight.segments[0].flightSegment.departure
+                        .iataCode
+                    }
+                    {outboundFlight.segments[0].flightSegment.departure.at}
+                  </div>
+                  <div className="flight-item">
+                    To
+                    {outboundFlight.segments[0].flightSegment.arrival.iataCode}
+                    {outboundFlight.segments[0].flightSegment.arrival.at}
+                  </div>
+                  <div className="flight-item">
+                    Carrier
+                    {
+                      outboundFlight.segments[0].flightSegment.operating
+                        .carrierCode
+                    }
+                  </div>
+                  <div className="flight-item">
+                    Duration
+                    {outboundFlight.segments[0].flightSegment.duration}
+                  </div>
+                </div>
+                <div className="second-flight">{firstRender}</div>
               </div>
-              <div>
-                <li>
-                  From
-                  {returnFlight.segments[0].flightSegment.departure.iataCode}
-                </li>
-                <li>
-                  To
-                  {returnFlight.segments[0].flightSegment.arrival.iataCode}
-                </li>
-                <li>
-                  Carrier
-                  {returnFlight.segments[0].flightSegment.operating.carrierCode}
-                </li>
-                <li>
-                  Duration
-                  {returnFlight.segments[0].flightSegment.duration}
-                </li>
-                <li>
-                  From
-                  {returnFlight.segments[0].flightSegment.departure.iataCode}
-                </li>
-                <li>
-                  To
-                  {returnFlight.segments[0].flightSegment.arrival.iataCode}
-                </li>
-                <li>
-                  Carrier
-                  {returnFlight.segments[0].flightSegment.operating.carrierCode}
-                </li>
-                <li>
-                  Duration
-                  {returnFlight.segments[0].flightSegment.duration}
-                </li>
-                {console.log(
-                  returnFlight.segments,
-                  returnFlight.segments.length
-                )}
-                {secondRender}
+              <div className="return-container flex-container">
+                <div className="first-flight">
+                  <div className="flight-item">
+                    {returnFlight.segments[0].flightSegment.departure.iataCode}
+                    {returnFlight.segments[0].flightSegment.departure.at}
+                  </div>
+                  <div className="flight-item">
+                    {returnFlight.segments[0].flightSegment.arrival.iataCode}
+                    {returnFlight.segments[0].flightSegment.arrival.at}
+                  </div>
+                  <div className="flight-item">
+                    Carrier
+                    {
+                      returnFlight.segments[0].flightSegment.operating
+                        .carrierCode
+                    }
+                  </div>
+                  <div className="flight-item">
+                    Duration
+                    {returnFlight.segments[0].flightSegment.duration}
+                  </div>
+                </div>
+                <div className="second-flight">{secondRender}</div>
+              </div>
+              {console.log(returnFlight.segments, returnFlight.segments.length)}
+            </div>
+
+            <div className="price-btn">
+              <div className="price-container">
+                <p className="font-weight-bold">
+                  <span className="font-weight-lighter">
+                    ${flight.offerItems[0].price.total} + $
+                    {flight.offerItems[0].price.totalTaxes} =
+                  </span>
+                  <span>$ </span>
+                  {Number(flight.offerItems[0].price.total) +
+                    Number(flight.offerItems[0].price.totalTaxes)}
+                </p>
+                <button type="button" className="btn-select btn btn-lg">
+                  <Link
+                    to={{
+                      pathname: "/flight-details",
+                      flight: { flight },
+                      user: this.props.location.props.user,
+                      destination: this.props.location.props.destination,
+                      destinationLocation: this.props.location.props
+                        .destinationLocation
+                    }}
+                  >
+                    SELECT >
+                  </Link>
+                </button>
               </div>
             </div>
-            <button>
-              <Link
-                to={{
-                  pathname: "/flight-details",
-                  flight: { flight },
-                  user: this.props.location.props.user,
-                  destination: this.props.location.props.destination,
-                  destinationLocation: this.props.location.props
-                    .destinationLocation
-                }}
-              >
-                Book flight
-              </Link>
-            </button>
-          </ul>
+          </div>
         );
       });
     }
