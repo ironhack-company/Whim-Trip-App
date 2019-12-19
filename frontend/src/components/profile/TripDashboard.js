@@ -53,6 +53,9 @@ class TripDashboard extends Component {
         console.log(link)
         axios.post(`${baseUrl}/getmystuff`, {link:link}).then(response => {
             console.log(response.data)
+            this.setState({
+                attractions: response.data
+            })
         })
         });
     })
@@ -60,28 +63,52 @@ class TripDashboard extends Component {
 
 
   getLocationData = () => {
-    if (this.state.airports) {
-      return this.state.airports.map((eachAirport, i) => {
-        if (eachAirport.country == "United States")
-          if (eachAirport.links_count > 15) {
+      
+    if (this.state.attractions) {
+      return this.state.attractions.map((eachAttraction, i) => {
+          console.log(eachAttraction)
             return (
               <Marker
-                title={eachAirport.name}
+                title={eachAttraction.name}
                 // onMouseover={this.onMouseoverMarker}
                 onClick={this.onClickOnMarker}
-                name={eachAirport.name}
-                code={eachAirport.iata_code}
+                name={eachAttraction.name}
+                address={eachAttraction.formatted_address}
+                id={eachAttraction.id}
+                hours={eachAttraction.opening_hours}
+                photos={eachAttraction.photos}
+                place_id={eachAttraction.place_id}
+                types={eachAttraction.types}
                 position={{
-                  lat: eachAirport._geoloc.lat,
-                  lng: eachAirport._geoloc.lng
+                  lat: eachAttraction.geometry.location.lat,
+                  lng: eachAttraction.geometry.location.lng
                 }}
                 key={i}
               />
             );
-          }
-      });
+          })
+    
     }
   };
+
+  onClickOnMarker = (props, marker, e) => {
+    this.setState({
+      selectedPlace: props,
+      activeMarker: marker,
+      showingInfoWindow: true,
+      clicked: true,
+    });
+    axios.get(`https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyC_Ryd8LuP-hChe7SPdvM_naB5ofhdF2QQ&placeid=${this.state.selectedPlace.place_id}`).then(response =>{
+        console.log(response)
+    })
+    // console.log(this.state.selectedPlace);
+    //    let link = `https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyC_Ryd8LuP-hChe7SPdvM_naB5ofhdF2QQ&placeid=${this.state.selectedPlace.place_id}`
+    //    console.log(link)
+    //    axios.post(`${baseUrl}/getmystuff`, {link:link}).then(response => {
+    //        console.log(response.data)
+//    })
+  };
+
 
     render() {
         console.log(this.props)
@@ -126,14 +153,17 @@ class TripDashboard extends Component {
                    </div>
                     
                     <div className="mapDiv col">
-                        <Map google={google} initialCenter={this.state.destinationLocation} zoom={10}>
+                        <Map google={google} initialCenter={this.state.cityCoords} zoom={10}>
                         <Marker onClick={this.onMarkerClick} name={"Current location"} />
+                        {this.getLocationData()}
                         <InfoWindow
                             marker={this.state.activeMarker}
                             visible={this.state.showingInfoWindow}
                         >
                             <div>
                             <h1>{this.state.selectedPlace.name}</h1>
+                            <h4>{this.state.selectedPlace.address}</h4>
+                            {/* <p>Open now: {this.state.selectedPlace.hours}</p> */}
                             </div>
                         </InfoWindow>
                         </Map>
@@ -149,4 +179,3 @@ class TripDashboard extends Component {
 export default GoogleApiWrapper({
     apiKey: "AIzaSyC_Ryd8LuP-hChe7SPdvM_naB5ofhdF2QQ"
   })(TripDashboard);
-
