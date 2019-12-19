@@ -199,6 +199,15 @@ export default class HotelSearch extends Component {
           <li>Duration {flight.offerItems[0].services[0].segments[0].flightSegment.duration}</li>
           <li>Price {flight.offerItems[0].price.total}  </li>
         </ul>
+
+
+
+
+
+
+
+
+        
       );
 
       {/* <h4>OutBound</h4>

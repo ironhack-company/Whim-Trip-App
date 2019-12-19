@@ -8,6 +8,7 @@ import "./FlightSearch2.css";
 import { Link, Redirect } from "react-router-dom";
 import Loader from "react-loader-spinner";
 import airports from "../../data/airports";
+import baseUrl from "../../services/configUrl"
 
 export class FlightSearch extends Component {
   state = {
@@ -37,7 +38,7 @@ export class FlightSearch extends Component {
     console.log("Components!");
     //localhost:3000/profile
     // console.log(this.props)
-    axios.get("http://whim-travel.co/flight-search").then(data =>
+    axios.get(`${baseUrl}/flight-search`).then(data =>
       this.setState({
         airports: data.data
       })
@@ -114,32 +115,32 @@ export class FlightSearch extends Component {
     //});
   };
 
-  saveFlight = (e, flight) => {
-    e.preventDefault();
-    console.log(this.props.user);
-    let copyUser = this.props.user;
-    copyUser.flights.push(flight);
-    let copyFlights = [...this.state.savedFlights];
-    this.setState(
-      {
-        user: copyUser,
-        savedFlights: copyFlights
-      },
-      () => {
-        console.log(this.state.user);
-        service
-          .post(`/add-flight/${copyUser._id}`, {
-            flights: this.state.user.flights
-          })
-          .then(data => {
-            console.log(data);
-          })
-          .catch(err => {
-            console.log(err);
-          });
-      }
-    );
-  };
+  // saveFlight = (e, flight) => {
+  //   e.preventDefault();
+  //   console.log(this.props.user);
+  //   let copyUser = this.props.user;
+  //   copyUser.flights.push(flight);
+  //   let copyFlights = [...this.state.savedFlights];
+  //   this.setState(
+  //     {
+  //       user: copyUser,
+  //       savedFlights: copyFlights
+  //     },
+  //     () => {
+  //       console.log(this.state.user);
+  //       service
+  //         .post(`/add-flight/${copyUser._id}`, {
+  //           flights: this.state.user.flights
+  //         })
+  //         .then(data => {
+  //           console.log(data);
+  //         })
+  //         .catch(err => {
+  //           console.log(err);
+  //         });
+  //     }
+  //   );
+  // };
 
   handleInputChange = e => {
     console.log(this.state);
@@ -322,6 +323,7 @@ export class FlightSearch extends Component {
 
   render() {
     console.log(this.state);
+    console.log(this.props)
     const { loading, userLocation } = this.state;
     const { google } = this.props;
 

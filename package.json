@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/ironhack-company/final-project-backend#readme",
   "dependencies": {
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "react-dates": "^21.5.1"
   }
 }

@@ -4,12 +4,14 @@ import { Link, Redirect } from "react-router-dom";
 import { thisExpression } from "@babel/types";
 import { Button, Form, Col } from "react-bootstrap";
 import CountriesSelect from "react-form-countries-select";
+import baseUrl from "../../services/configUrl"
 
 export default class FlightDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedFlight: null
+      selectedFlight: null,
+      destinationLocation: {lat:'',lng:''}
     };
     console.log(this.props);
   }
@@ -148,25 +150,24 @@ export default class FlightDetail extends Component {
 
   handleSubmit = e => {
     console.log("handling submit");
-    // e.preventDefault();
+    e.preventDefault();
     console.log(this.props);
     let copyUser = this.props.location.user;
     console.log(copyUser);
-    copyUser.trips.push(this.state.selectedFlight);
-    let copySelectedFlights = this.state.selectedFlight;
+    // copyUser.trips.push(this.state.selectedFlight);
+    // let copySelectedFlights = this.state.selectedFlight;
     this.setState(
       {
         user: copyUser,
-        selectedFlight: copySelectedFlights
+        // selectedFlight: copySelectedFlights
       },
       () => {
         console.log(this.state.user);
         axios
-          .post(`http://whim-travel.co/add-flight/${copyUser._id}`, {
-            selectedFlights: this.state.user.selectedFlights
-          })
+          .post(`${baseUrl}/add-flight/${copyUser._id}`, this.state)
           .then(data => {
-            console.log(data);
+            console.log(data, 'yaaaa');
+            this.props.history.push(`/dashboard/${data.data._id}`)
           })
           .catch(err => {
             console.log(err);
@@ -190,19 +191,19 @@ export default class FlightDetail extends Component {
             <Form.Group as={Col} md="6">
               <Form.Label>First Name:</Form.Label>
               <Form.Control
-                name="first-name"
+                name="firstName"
                 type="text"
                 onChange={this.handleChange}
               />
               <Form.Label>Middle Name:</Form.Label>
               <Form.Control
-                name="middle-name"
+                name="middleName"
                 type="text"
                 onChange={this.handleChange}
               />
               <Form.Label>Last Name:</Form.Label>
               <Form.Control
-                name="last-name"
+                name="lastName"
                 type="text"
                 onChange={this.handleChange}
               />
@@ -218,7 +219,7 @@ export default class FlightDetail extends Component {
             <Form.Group as={Col} md="6">
               <Form.Label>Phone number:</Form.Label>
               <Form.Control
-                name="phone-number"
+                name="phoneNumber"
                 type="text"
                 onChange={this.handleChange}
               />
@@ -234,12 +235,24 @@ export default class FlightDetail extends Component {
             <Form.Group as={Col} md="6">
               <Form.Label>Date of birth:</Form.Label>
               <Form.Control
-                name="date-of-birth"
+                name="dateOfBirth"
                 type="text"
                 onChange={this.handleChange}
               />
             </Form.Group>
-            <Link to={{pathname: "/dashboard",
+
+
+              <Button
+                id="submit"
+                type="submit"
+                value="Sign Up"
+                variant="primary"
+                onClick={e => this.handleSubmit(e, this.state.selectedFlight)}
+              >
+                Book this flight
+              </Button>
+              
+            {/* <Link to={{pathname: "/dashboard",
             myFlight: this.state.selectedFlight,
             user: this.props.location.user,
             destination: this.props.location.destination,
@@ -255,7 +268,7 @@ export default class FlightDetail extends Component {
               >
                 Book this flight
               </Button>
-            </Link>
+            </Link> */}
           </form>
         </div>
       </div>
