@@ -18,6 +18,17 @@
   justify-content: space-evenly;
 }
 
+.flight-container > div{
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.leg{
+  width:100%;
+}
+
 .flight-item {
   flex-grow: 1;
 }
@@ -50,10 +61,18 @@ a:hover {
 }
 
 .first-flight,
-.second-flight {
+.second-flight,
+.leg {
+
+}
+
+.leg{
+  border-bottom: 1px dotted gray;
+  background: lightgray;
   margin: 0.5rem;
+  width: 50%;
+  border-radius: 5px;
   padding: 0.5rem;
   width: 50%;
-  background: lightgray;
-  border-radius: 5px;
+
 }

@@ -197,6 +197,7 @@ export default class CheckPrices extends Component {
             </div>
           </div>
         );
+        
       });
     }
   };
