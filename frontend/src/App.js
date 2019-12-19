@@ -16,6 +16,7 @@ import HotelSearch from "./components/Hotels/HotelSearch";
 import CheckPrices from "./components/Flights/CheckPrices";
 import PassengerDetailForm from "./components/Flights/PassengerDetailForm";
 import TripDashboard from "./components/profile/TripDashboard";
+import Dashboard from './components/Dashboard'
 import FlightDetail from "./components/Flights/FlightDetail";
 import axios from "axios";
 import baseURL from "./services/configUrl"
@@ -193,6 +194,17 @@ class App extends Component {
             component={TripDashboard}
             render={props => (
               <TripDashboard
+                {...props}
+                setUser={this.setUser}
+                user={this.state}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/dashboard"
+            render={props => (
+              <Dashboard
                 {...props}
                 setUser={this.setUser}
                 user={this.state}

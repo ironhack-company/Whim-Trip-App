@@ -59,6 +59,12 @@ router.get('/getBooking/:id', (req, res, next)=>{
 
 })
 
+router.get('/getAllBookings', (req, res, next)=>{
+  Booking.find({userId: req.user._id}).then(allBookings=>{
+    res.json({аллбукингс:allBookings})  
+  })  
+})
+
 
   
 
