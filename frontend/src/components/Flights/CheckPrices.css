@@ -1,4 +1,14 @@
-.loader {
+.leg {
+  border-bottom: 1px dotted gray;
+  background: lightgray;
+  margin: 0.5rem;
+  padding: 0.5rem;
+  width: 90%;
+  background: lightgray;
+  border-radius: 5px;
+  box-sizing: content-box;
+}
+*/ .loader {
   position: absolute;
   top: 40vh;
   right: 40vw;
@@ -16,17 +26,6 @@
   max-width: 80%;
   flex-wrap: wrap;
   justify-content: space-evenly;
-}
-
-.flight-container > div{
-  width: 30%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.leg{
-  width:100%;
 }
 
 .flight-item {
@@ -76,15 +75,8 @@ a:hover {
   text-decoration: none !important;
 }
 
-/* .first-flight,
-.second-flight,
-.leg {
-
-} */
-
-.leg{
-  border-bottom: 1px dotted gray;
-  background: lightgray;
+.first-flight,
+.second-flight {
   margin: 0.5rem;
   padding: 0.5rem;
   width: 90%;
