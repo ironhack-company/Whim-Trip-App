@@ -152,12 +152,12 @@ export default class FlightDetail extends Component {
     console.log(this.props);
     let copyUser = this.props.location.user;
     console.log(copyUser);
-    copyUser.trips.push(this.state.selectedFlight);
-    let copySelectedFlights = this.state.selectedFlight;
+    // copyUser.trips.push(this.state.selectedFlight);
+    // let copySelectedFlights = this.state.selectedFlight;
     this.setState(
       {
         user: copyUser,
-        selectedFlight: copySelectedFlights
+        // selectedFlight: copySelectedFlights
       },
       () => {
         console.log(this.state.user);

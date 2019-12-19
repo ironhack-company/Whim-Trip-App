@@ -1,16 +1,16 @@
-const { Schema, model } = require('mongoose');
-const PLM = require('passport-local-mongoose');
+const { Schema, model } = require("mongoose");
+const PLM = require("passport-local-mongoose");
 
 const userSchema = new Schema(
   {
     firstName: String,
     lastName: String,
-    email: String,
+    email: { type: String, required: true },
     username: String,
-    profileImg: {type: String, default:"/images/profile-icon-9.png"},
-    trips: [{type: Schema.Types.ObjectId, ref: "Trip"}],
+    profileImg: { type: String, default: "/images/profile-icon-9.png" },
+    trips: [{ type: Schema.Types.ObjectId, ref: "Trip" }],
     flights: [],
-    admin: {type: Boolean, default: false}
+    admin: { type: Boolean, default: false }
   },
   {
     timestamps: true,
@@ -18,6 +18,6 @@ const userSchema = new Schema(
   }
 );
 
-userSchema.plugin(PLM, { usernameField: 'username' });
+userSchema.plugin(PLM, { usernameField: "username" });
 
-module.exports = model('User', userSchema);
+module.exports = model("User", userSchema);
