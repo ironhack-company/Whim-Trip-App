@@ -3,7 +3,7 @@ import axios from "axios";
 import "./CheckPrices.css";
 import Loader from "react-loader-spinner";
 import { Link } from "react-router-dom";
-import { Container, Col } from "react-bootstrap";
+import { Container, Col, Row } from "react-bootstrap";
 
 export default class CheckPrices extends Component {
   constructor(props) {
@@ -73,21 +73,17 @@ export default class CheckPrices extends Component {
           firstRender = (
             <>
               <div className="flight-item">
-                From
                 {outboundFlight.segments[1].flightSegment.departure.iataCode}
                 {outboundFlight.segments[1].flightSegment.departure.at}
               </div>
               <div className="flight-item">
-                To
                 {outboundFlight.segments[1].flightSegment.arrival.iataCode}
                 {outboundFlight.segments[1].flightSegment.arrival.at}
               </div>
               <div className="flight-item">
-                Carrier
                 {outboundFlight.segments[1].flightSegment.operating.carrierCode}
               </div>
               <div className="flight-item">
-                Duration
                 {outboundFlight.segments[1].flightSegment.duration}
               </div>
             </>
@@ -97,21 +93,17 @@ export default class CheckPrices extends Component {
           secondRender = (
             <>
               <div className="flight-item">
-                From
                 {returnFlight.segments[1].flightSegment.departure.iataCode}
                 {returnFlight.segments[1].flightSegment.departure.at}
               </div>
               <div className="flight-item">
-                To
                 {returnFlight.segments[1].flightSegment.arrival.iataCode}
                 {returnFlight.segments[1].flightSegment.arrival.at}
               </div>
               <div className="flight-item">
-                Carrier
                 {returnFlight.segments[1].flightSegment.operating.carrierCode}
               </div>
               <div className="flight-item">
-                Duration
                 {returnFlight.segments[1].flightSegment.duration}
               </div>
             </>
@@ -127,7 +119,6 @@ export default class CheckPrices extends Component {
               <div className="outbound-container flex-container">
                 <div className="first-flight">
                   <div className="flight-item">
-                    From
                     {
                       outboundFlight.segments[0].flightSegment.departure
                         .iataCode
@@ -135,19 +126,16 @@ export default class CheckPrices extends Component {
                     {outboundFlight.segments[0].flightSegment.departure.at}
                   </div>
                   <div className="flight-item">
-                    To
                     {outboundFlight.segments[0].flightSegment.arrival.iataCode}
                     {outboundFlight.segments[0].flightSegment.arrival.at}
                   </div>
                   <div className="flight-item">
-                    Carrier
                     {
                       outboundFlight.segments[0].flightSegment.operating
                         .carrierCode
                     }
                   </div>
                   <div className="flight-item">
-                    Duration
                     {outboundFlight.segments[0].flightSegment.duration}
                   </div>
                 </div>
@@ -164,14 +152,12 @@ export default class CheckPrices extends Component {
                     {returnFlight.segments[0].flightSegment.arrival.at}
                   </div>
                   <div className="flight-item">
-                    Carrier
                     {
                       returnFlight.segments[0].flightSegment.operating
                         .carrierCode
                     }
                   </div>
                   <div className="flight-item">
-                    Duration
                     {returnFlight.segments[0].flightSegment.duration}
                   </div>
                 </div>
@@ -180,18 +166,20 @@ export default class CheckPrices extends Component {
               {console.log(returnFlight.segments, returnFlight.segments.length)}
             </div>
 
-            <div className="price-btn">
+            <div className="price-btn flex-container">
               <div className="price-container">
                 <p className="font-weight-bold">
                   <span className="font-weight-lighter">
                     ${flight.offerItems[0].price.total} + $
                     {flight.offerItems[0].price.totalTaxes} =
                   </span>
-                  <span>$ </span>
-                  {Number(flight.offerItems[0].price.total) +
-                    Number(flight.offerItems[0].price.totalTaxes)}
+                  <span className="total-price">
+                    $
+                    {Number(flight.offerItems[0].price.total) +
+                      Number(flight.offerItems[0].price.totalTaxes)}{" "}
+                  </span>
                 </p>
-                <button type="button" className="btn-select btn btn-lg">
+                <button type="button" className="btn-orange btn btn-lg">
                   <Link
                     to={{
                       pathname: "/flight-details",
@@ -223,7 +211,7 @@ export default class CheckPrices extends Component {
           color="#00BFFF"
           height={100}
           width={100}
-          timeout={6000} //6 secs
+          timeout={8000} //8secs
           className="loader"
         />
       );
