@@ -8,7 +8,7 @@
   border-radius: 5px;
   box-sizing: content-box;
 }
-*/ .loader {
+.loader {
   position: absolute;
   top: 40vh;
   right: 40vw;
@@ -84,4 +84,4 @@ a:hover {
   background: lightgray;
   border-radius: 5px;
   box-sizing: content-box;
-} d
+} 
