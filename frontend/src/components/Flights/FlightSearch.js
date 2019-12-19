@@ -40,22 +40,12 @@ export class FlightSearch extends Component {
     // console.log(this.props)
     axios.get(`${baseUrl}/flight-search`).then(data =>
       this.setState({
-        airports: data.data
+        airports: data.data,
+        userLocation: { lat: this.props.user.userLocation.latitude, lng: this.props.user.userLocation.longitude },
+        loading: false
       })
-    );
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        const { latitude, longitude } = position.coords;
-
-        this.setState({
-          userLocation: { lat: this.props.user.userLocation.latitude, lng: this.props.user.userLocation.longitude },
-          loading: false
-        });
-      },
-      () => {
-        this.setState({ loading: false });
-      }
-    );
+    )
+    
   }
 
   getLocationData = () => {
