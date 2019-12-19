@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
 import { thisExpression } from "@babel/types";
-
+import baseUrl from '../../services/configUrl'
+console.log(baseUrl)
 export default class PassengerDetailForm extends Component {
   constructor(props) {
     super(props);
@@ -38,7 +39,7 @@ export default class PassengerDetailForm extends Component {
       () => {
         console.log(this.state.user);
         axios
-          .post(`http://whim-travel.co/add-flight/${copyUser._id}`, {
+          .post(`${baseUrl}/add-flight/${copyUser._id}`, {
             flights: this.state.user.flights
           })
           .then(data => {
