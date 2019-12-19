@@ -16,7 +16,7 @@ export class FlightSearch extends Component {
     flights: [],
     savedFlights: [],
     filteredFlights: [],
-    userLocation: { lat: 32, lng: 32 },
+    userLocation: { lat: 25, lng: -80 },
     loading: true,
     showingInfoWindow: false,
     activeMarker: {},
