@@ -3,7 +3,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import airports from '../../data/airports';
-import "./FlightSearch2.css";
+// import "./FlightSearch2.css";
+import "./CheapFlights.css";
+
 
 import 'react-dates/initialize';
 import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
@@ -307,7 +309,7 @@ export default class HotelSearch extends Component {
 
               <div class="form-group">
                 <span class="form-label">Flying to</span>
-                <input
+                <input className="form-control" type="text"
                   placeholder="Input your location"
                   value={this.state.query}
                   onChange={this.handleInputTo}

@@ -76,11 +76,11 @@ a:hover {
   text-decoration: none !important;
 }
 
-.first-flight,
+/* .first-flight,
 .second-flight,
 .leg {
 
-}
+} */
 
 .leg{
   border-bottom: 1px dotted gray;
