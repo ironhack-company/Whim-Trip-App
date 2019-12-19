@@ -6,31 +6,40 @@
 
 .flex-container {
   display: flex;
-  flex-wrap: wrap;
 }
 
 .flight-container {
   padding: 1rem;
-  margin: 1rem;
+  margin: 1rem auto;
   box-sizing: border-box;
   background: #ffffff;
+  max-width: 80%;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .flight-item {
   flex-grow: 1;
 }
 
-.first-flight {
+.outbound-container {
   border-bottom: 1px dotted gray;
 }
 
-.btn-select {
+.price-btn {
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.total-price {
+  font-size: 2.4rem;
+}
+
+.btn-orange {
   background-color: #ff6d00;
   color: #fff;
-  /* border: 0;
-  border-bottom: 1px solid #d64d08;
-  border-radius: 4px;
-  box-shadow: 0 1px 1px 0 #e7e7e7; */
+  width: 100%;
+  text-align: center;
 }
 
 a {
@@ -38,4 +47,13 @@ a {
 }
 a:hover {
   text-decoration: none !important;
+}
+
+.first-flight,
+.second-flight {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  width: 50%;
+  background: lightgray;
+  border-radius: 5px;
 }
