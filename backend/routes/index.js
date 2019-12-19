@@ -4,6 +4,15 @@ const User    = require('../models/User');
 const Trip  = require('../models/Trip');
 const Airport  = require('../models/Airport');
 const Booking  = require('../models/BookingDetails');
+const axios = require('axios')
+
+router.post('/getmystuff', (req, res) => {
+  axios.get(req.body.link).then(response => {
+    console.log(response.data)
+    res.json(response.data.results)
+  })
+})
+
 
 
 router.get('/mytrips/:id', (req, res, next)=>{
