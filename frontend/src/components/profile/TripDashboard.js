@@ -98,7 +98,7 @@ class TripDashboard extends Component {
       showingInfoWindow: true,
       clicked: true,
     });
-    axios.get(`https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyC_Ryd8LuP-hChe7SPdvM_naB5ofhdF2QQ&placeid=${this.state.selectedPlace.place_id}`).then(response =>{
+    axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyC_Ryd8LuP-hChe7SPdvM_naB5ofhdF2QQ&placeid=${this.state.selectedPlace.place_id}`).then(response =>{
         console.log(response)
     })
     // console.log(this.state.selectedPlace);
