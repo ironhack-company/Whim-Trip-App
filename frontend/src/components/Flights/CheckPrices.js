@@ -73,18 +73,41 @@ export default class CheckPrices extends Component {
           firstRender = (
             <>
               <div className="flight-item">
-                {outboundFlight.segments[1].flightSegment.departure.iataCode}
-                {outboundFlight.segments[1].flightSegment.departure.at}
+                <li>
+                  {outboundFlight.segments[1].flightSegment.departure.iataCode}
+                </li>
+                <li>
+                  {outboundFlight.segments[1].flightSegment.departure.at.slice(
+                    0,
+                    10
+                  )}
+                </li>
+                <li>
+                  {outboundFlight.segments[1].flightSegment.departure.at.slice(
+                    11,
+                    16
+                  )}
+                </li>
+              </div>
+              <div className="flight-item duration">
+                {outboundFlight.segments[1].flightSegment.duration.slice(3)}
               </div>
               <div className="flight-item">
-                {outboundFlight.segments[1].flightSegment.arrival.iataCode}
-                {outboundFlight.segments[1].flightSegment.arrival.at}
-              </div>
-              <div className="flight-item">
-                {outboundFlight.segments[1].flightSegment.operating.carrierCode}
-              </div>
-              <div className="flight-item">
-                {outboundFlight.segments[1].flightSegment.duration}
+                <li>
+                  {outboundFlight.segments[1].flightSegment.arrival.iataCode}
+                </li>
+                <li>
+                  {outboundFlight.segments[1].flightSegment.arrival.at.slice(
+                    0,
+                    10
+                  )}
+                </li>
+                <li>
+                  {outboundFlight.segments[1].flightSegment.arrival.at.slice(
+                    11,
+                    16
+                  )}
+                </li>
               </div>
             </>
           );
@@ -93,18 +116,41 @@ export default class CheckPrices extends Component {
           secondRender = (
             <>
               <div className="flight-item">
-                {returnFlight.segments[1].flightSegment.departure.iataCode}
-                {returnFlight.segments[1].flightSegment.departure.at}
+                <li>
+                  {returnFlight.segments[1].flightSegment.departure.iataCode}
+                </li>
+                <li>
+                  {returnFlight.segments[1].flightSegment.departure.at.slice(
+                    0,
+                    10
+                  )}
+                </li>
+                <li>
+                  {returnFlight.segments[1].flightSegment.departure.at.slice(
+                    11,
+                    16
+                  )}
+                </li>
+              </div>
+              <div className="flight-item duration">
+                {returnFlight.segments[1].flightSegment.duration.slice(3)}
               </div>
               <div className="flight-item">
-                {returnFlight.segments[1].flightSegment.arrival.iataCode}
-                {returnFlight.segments[1].flightSegment.arrival.at}
-              </div>
-              <div className="flight-item">
-                {returnFlight.segments[1].flightSegment.operating.carrierCode}
-              </div>
-              <div className="flight-item">
-                {returnFlight.segments[1].flightSegment.duration}
+                <li>
+                  {returnFlight.segments[1].flightSegment.arrival.iataCode}
+                </li>
+                <li>
+                  {returnFlight.segments[1].flightSegment.arrival.at.slice(
+                    0,
+                    10
+                  )}
+                </li>
+                <li>
+                  {returnFlight.segments[1].flightSegment.arrival.at.slice(
+                    11,
+                    16
+                  )}
+                </li>
               </div>
             </>
           );
@@ -116,69 +162,134 @@ export default class CheckPrices extends Component {
             key={i}
           >
             <div className="flight-schedule">
+              <p className="from-to">
+                Outbound{" "}
+                {outboundFlight.segments[0].flightSegment.operating.carrierCode}
+              </p>
               <div className="outbound-container flex-container">
-                <div className="first-flight">
+                <div className="first-flight flex-container">
                   <div className="flight-item">
-                    {
-                      outboundFlight.segments[0].flightSegment.departure
-                        .iataCode
-                    }
-                    {outboundFlight.segments[0].flightSegment.departure.at}
+                    <li>
+                      {
+                        outboundFlight.segments[0].flightSegment.departure
+                          .iataCode
+                      }
+                    </li>
+                    <li>
+                      {outboundFlight.segments[0].flightSegment.departure.at.slice(
+                        0,
+                        10
+                      )}
+                    </li>
+                    <li>
+                      {outboundFlight.segments[0].flightSegment.departure.at.slice(
+                        11,
+                        16
+                      )}
+                    </li>
+                  </div>
+                  <div className="flight-item duration">
+                    {outboundFlight.segments[0].flightSegment.duration.slice(3)}
                   </div>
                   <div className="flight-item">
-                    {outboundFlight.segments[0].flightSegment.arrival.iataCode}
-                    {outboundFlight.segments[0].flightSegment.arrival.at}
-                  </div>
-                  <div className="flight-item">
-                    {
-                      outboundFlight.segments[0].flightSegment.operating
-                        .carrierCode
-                    }
-                  </div>
-                  <div className="flight-item">
-                    {outboundFlight.segments[0].flightSegment.duration}
+                    <li>
+                      {
+                        outboundFlight.segments[0].flightSegment.arrival
+                          .iataCode
+                      }
+                    </li>
+                    <li>
+                      {outboundFlight.segments[0].flightSegment.arrival.at.slice(
+                        0,
+                        10
+                      )}
+                    </li>
+                    <li>
+                      {outboundFlight.segments[0].flightSegment.arrival.at.slice(
+                        11,
+                        16
+                      )}
+                    </li>
                   </div>
                 </div>
-                <div className="second-flight">{firstRender}</div>
+                <div className="second-flight flex-container">
+                  {firstRender}
+                </div>
               </div>
+              <p className="from-to">
+                Return{" "}
+                {returnFlight.segments[0].flightSegment.operating.carrierCode}
+              </p>
               <div className="return-container flex-container">
-                <div className="first-flight">
+                <div className="first-flight flex-container">
                   <div className="flight-item">
-                    {returnFlight.segments[0].flightSegment.departure.iataCode}
-                    {returnFlight.segments[0].flightSegment.departure.at}
+                    <li>
+                      {
+                        returnFlight.segments[0].flightSegment.departure
+                          .iataCode
+                      }
+                    </li>
+                    <li>
+                      {returnFlight.segments[0].flightSegment.departure.at.slice(
+                        0,
+                        10
+                      )}
+                    </li>
+                    <li>
+                      {returnFlight.segments[0].flightSegment.departure.at.slice(
+                        11,
+                        16
+                      )}
+                    </li>
+                  </div>
+                  <div className="flight-item duration">
+                    {returnFlight.segments[0].flightSegment.duration.slice(3)}
+                    <div>
+                      <img src="../../images/plane-arrival-solid.svg" alt="" />
+                    </div>
                   </div>
                   <div className="flight-item">
-                    {returnFlight.segments[0].flightSegment.arrival.iataCode}
-                    {returnFlight.segments[0].flightSegment.arrival.at}
-                  </div>
-                  <div className="flight-item">
-                    {
-                      returnFlight.segments[0].flightSegment.operating
-                        .carrierCode
-                    }
-                  </div>
-                  <div className="flight-item">
-                    {returnFlight.segments[0].flightSegment.duration}
+                    <li>
+                      {returnFlight.segments[0].flightSegment.arrival.iataCode}
+                    </li>
+                    <li>
+                      {returnFlight.segments[0].flightSegment.arrival.at.slice(
+                        0,
+                        10
+                      )}
+                    </li>
+                    <li>
+                      {returnFlight.segments[0].flightSegment.arrival.at.slice(
+                        11,
+                        16
+                      )}
+                    </li>
                   </div>
                 </div>
-                <div className="second-flight">{secondRender}</div>
+                <div className="second-flight flex-container">
+                  {secondRender}
+                </div>
               </div>
               {console.log(returnFlight.segments, returnFlight.segments.length)}
             </div>
 
             <div className="price-btn flex-container">
               <div className="price-container">
-                <p className="font-weight-bold">
-                  <span className="font-weight-lighter">
-                    ${flight.offerItems[0].price.total} + $
-                    {flight.offerItems[0].price.totalTaxes} =
-                  </span>
-                  <span className="total-price">
+                <div className="font-weight-bold">
+                  <li className="total-price">
                     $
-                    {Number(flight.offerItems[0].price.total) +
-                      Number(flight.offerItems[0].price.totalTaxes)}{" "}
-                  </span>
-                </p>
+                    {(
+                      Number(flight.offerItems[0].price.total) +
+                      Number(flight.offerItems[0].price.totalTaxes)
+                    ).toFixed(2)}
+                  </li>
+                  <li className="font-weight-lighter">
+                    Price: ${flight.offerItems[0].price.total}
+                  </li>
+                  <li className="font-weight-lighter">
+                    Tax: ${flight.offerItems[0].price.totalTaxes}
+                  </li>
+                </div>
                 <button type="button" className="btn-orange btn btn-lg">
                   <Link
                     to={{
