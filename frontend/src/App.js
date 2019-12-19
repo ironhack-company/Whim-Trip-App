@@ -21,6 +21,10 @@ import FlightDetail from "./components/Flights/FlightDetail";
 import axios from "axios";
 import baseURL from "./services/configUrl"
 
+import iplocation from "iplocation";
+import publicIp from 'public-ip'
+
+
 class App extends Component {
   state = {};
 
@@ -31,6 +35,18 @@ class App extends Component {
     console.log(headers);
     this.fetchAllData();
     this.setState({ ...user.data, headers });
+    (async () => {
+      let ip = await publicIp.v4()
+      console.log(ip);
+      
+      iplocation(ip, [], (error, res) => {
+        console.log(res)
+        this.setState({
+          userLocation:res
+        })
+      });
+    })();
+    
   }
 
   getToken = () => {
@@ -76,7 +92,7 @@ class App extends Component {
 
   render() {
     console.log(this.state.email);
-    console.log(this.state.user);
+    console.log(this.state);
     return (
       <BrowserRouter>
         <Navbar bg="light" expand="lg">

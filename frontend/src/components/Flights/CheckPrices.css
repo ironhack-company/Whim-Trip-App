@@ -31,25 +31,41 @@
 
 .flight-item {
   flex-grow: 1;
+  font-size: 1.2rem;
 }
 
-.outbound-container {
+.outbound-container,
+.return-container {
   border-bottom: 1px dotted gray;
+  flex-direction: column;
+}
+
+.flight-schedule {
+  flex-grow: 3;
 }
 
 .price-btn {
   flex-direction: column;
   justify-content: space-around;
+  flex-grow: 1;
+  padding: 1rem;
 }
 
 .total-price {
-  font-size: 2.4rem;
+  font-size: 3.2rem;
+  font-weight: bold;
+  color: green;
+}
+
+.from-to {
+  font-size: 1.8rem;
+  font-weight: bold;
 }
 
 .btn-orange {
   background-color: #ff6d00;
   color: #fff;
-  width: 100%;
+  width: 80%;
   text-align: center;
 }
 
@@ -70,9 +86,9 @@ a:hover {
   border-bottom: 1px dotted gray;
   background: lightgray;
   margin: 0.5rem;
-  width: 50%;
-  border-radius: 5px;
   padding: 0.5rem;
-  width: 50%;
-
+  width: 90%;
+  background: lightgray;
+  border-radius: 5px;
+  box-sizing: content-box;
 }

@@ -16,7 +16,7 @@ export class FlightSearch extends Component {
     flights: [],
     savedFlights: [],
     filteredFlights: [],
-    userLocation: { lat: 32, lng: 32 },
+    userLocation: { lat: 25, lng: -80 },
     loading: true,
     showingInfoWindow: false,
     activeMarker: {},
@@ -40,22 +40,12 @@ export class FlightSearch extends Component {
     // console.log(this.props)
     axios.get(`${baseUrl}/flight-search`).then(data =>
       this.setState({
-        airports: data.data
+        airports: data.data,
+        userLocation: { lat: this.props.user.userLocation.latitude, lng: this.props.user.userLocation.longitude },
+        loading: false
       })
-    );
-    navigator.geolocation.getCurrentPosition(
-      position => {
-        const { latitude, longitude } = position.coords;
-
-        this.setState({
-          userLocation: { lat: latitude, lng: longitude },
-          loading: false
-        });
-      },
-      () => {
-        this.setState({ loading: false });
-      }
-    );
+    )
+    
   }
 
   getLocationData = () => {
@@ -196,22 +186,6 @@ export class FlightSearch extends Component {
     }
   };
 
-  // showDestination = () => {
-  //   // console.log(this.state.flights)
-  //   return this.state.flights.map((segment, i) => {
-
-  //     console.log("This is the destination", segment.destination)
-
-  //     if (segment.destination) {
-  //       return (
-  //         <ul key={i}>
-  //           {/* <li>Origin: {this.findName(segment.origin)}</li> */}
-  //           <li>Destination: {this.findName(segment.destination)}</li>
-  //         </ul>
-  //       )
-  //     }
-  //   })
-  // }
 
   showFlights = () => {
     return this.state.filteredFlights.map((flight, index) => {
