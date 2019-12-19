@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from "google-maps-react";
 import Loader from "react-loader-spinner";
+import axios from 'axios';
+import baseUrl from '../../services/configUrl'
 
 class TripDashboard extends Component {
     
@@ -10,6 +12,7 @@ class TripDashboard extends Component {
         showingInfoWindow: false,
         activeMarker: {},
         selectedPlace: {},
+        destinationLocation: {lat:0, lng:0}
     }
 
 componentDidMount(){
@@ -18,14 +21,26 @@ componentDidMount(){
     script.async = true;
     console.log()
     document.body.appendChild(script)
+    this.getDestination()
+
     }
 
 
 
 
+
 getDestination = () => {
-    let theDestination = this.props.location.destination
-    return theDestination
+    console.log('in here', this.props.match.params.id)
+    // Axios.get(your flights)
+    axios
+    .get(`${baseUrl}/getBooking/${this.props.match.params.id}`)
+    .then(data => {
+      console.log(data);
+      this.setState({data:data.data})
+    })
+    .catch(err => {
+      console.log(err);
+    });
 }
 
 
@@ -49,15 +64,15 @@ getDestination = () => {
         // }
         return (
             <div>
-                My Trip to {this.getDestination()}
+                {/* My Trip to {this.getDestination()} */}
                 <div className="hotelMap">
 
                         <ins className="bookingaff" data-aid="1928826" 
                                 data-target_aid="1928826" data-prod="map" 
                                 data-width="100%" data-height="590" data-lang="ualng" 
                                 data-dest_id="0" data-dest_type="landmark" 
-                                data-latitude={this.props.location.destinationLocation.lat} 
-                                data-longitude={this.props.location.destinationLocation.lng} data-mwhsb="1" 
+                                data-latitude={this.state.destinationLocation.lat} 
+                                data-longitude={this.state.destinationLocation.lng} data-mwhsb="1" 
                                 data-zoom="12" >
                                 <a href="//www.booking.com?aid=1928826">Booking.com</a>
                         </ins>
@@ -65,7 +80,7 @@ getDestination = () => {
                </div>
                 
                 <div className="mapDiv col">
-                    <Map google={google} initialCenter={this.props.location.destinationLocation} zoom={10}>
+                    <Map google={google} initialCenter={this.state.destinationLocation} zoom={10}>
                     <Marker onClick={this.onMarkerClick} name={"Current location"} />
                     {/* {this.getLocationData()} */}
                     <InfoWindow

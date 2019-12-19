@@ -18,6 +18,7 @@ import PassengerDetailForm from "./components/Flights/PassengerDetailForm";
 import TripDashboard from "./components/profile/TripDashboard";
 import FlightDetail from "./components/Flights/FlightDetail";
 import axios from "axios";
+import baseURL from "./services/configUrl"
 
 class App extends Component {
   state = {};
@@ -61,9 +62,9 @@ class App extends Component {
 
   fetchAllData = async () => {
     try {
-      let authors = await axios.get("http://whim-travel.co/");
-      let books = await axios.get("http://whim-travel.co/");
-      let currentUser = await axios.get("http://whim-travel.co/", {
+      let authors = await axios.get(baseURL);
+      let books = await axios.get(baseURL);
+      let currentUser = await axios.get(baseURL, {
         withCredentials: true
       });
       this.setState({});
@@ -73,6 +74,8 @@ class App extends Component {
   };
 
   render() {
+    console.log(this.state.email);
+    console.log(this.state.user);
     return (
       <BrowserRouter>
         <Navbar bg="light" expand="lg">
@@ -101,7 +104,9 @@ class App extends Component {
                   <NavLink className="mr-4 text-dark" to="/hotel-search">
                     Hotels
                   </NavLink>
-                  <NavLink className="mr-4 text-dark" to="/dashboard">
+                  <NavLink className="mr-4 text-dark" 
+                  
+                  to="/dashboard">
                     Dashboard
                   </NavLink>
                   <NavLink className="mr-4 text-dark" to="/profile">
@@ -184,7 +189,7 @@ class App extends Component {
           />
           <Route
             exact
-            path="/dashboard"
+            path="/dashboard/:id"
             component={TripDashboard}
             render={props => (
               <TripDashboard

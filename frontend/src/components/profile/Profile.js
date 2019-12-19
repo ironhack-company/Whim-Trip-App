@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Profile.css";
-import axios from "axios";
+import { service as axios } from "../../services/index";
+import { Form, Col } from "react-bootstrap";
 
 class Profile extends Component {
   // constructor(props){
@@ -28,48 +29,33 @@ class Profile extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  // editTheUser = (e, userID) => {
-  //   e.preventDefault();
-  //   console.log("editing user", this.state.currentEmail);
-  //   let copyUser = this.props.user;
-  //   axios
-  //     .post(
-  //       `http://whim-travel.co/update/${copyUser._id}`,
-  //       {
-  //         theID: userID,
-  //         email: this.state.currentEmail
-  //       },
-  //       { withCredentials: true }
-  //     )
-  //     .then(response => {
-  //       console.log("successfully updated email");
-  //       this.props.updateAll();
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  // };
-
   editTheEmail = e => {
     e.preventDefault();
     console.log("editing email!");
-    axios
-      .patch("http://whim-travel.co/edit-email", {
-        email: this.state.currentEmail
-      })
-      .then(response => {
-        console.log(response.data);
-      });
+    if (this.state.currentEmail && this.state.currentEmail.length > 0) {
+      axios
+        .post("/edit-email", {
+          email: this.state.currentEmail
+        })
+        .then(response => {
+          console.log(response.data);
+          this.setState({
+            user: response.data
+          });
+        });
+    }
   };
 
   showMyTrips = () => {
-    return this.state.user.trips.map((eachTrip, index) => {
-      return (
-        <li key={index}>
-          <Link to={`/mytrips/${eachTrip}`}>{eachTrip}</Link>
-        </li>
-      );
-    });
+    if (this.state.user.trips) {
+      return this.state.user.trips.map((eachTrip, index) => {
+        return (
+          <li key={index}>
+            <Link to={`/mytrips/${eachTrip}`}>{eachTrip}</Link>
+          </li>
+        );
+      });
+    }
   };
 
   showMyFlights = () => {
@@ -146,27 +132,31 @@ class Profile extends Component {
             </h3>
             {!this.state.editingEmail && (
               <p>
-                {this.props.user.email}
+                {this.state.user.email}
                 <button onClick={this.toggleEditEmail}>Edit email</button>
               </p>
             )}
             {this.state.editingEmail && (
-              <form
+              <Form
                 onSubmit={e => {
                   this.editTheEmail(e, this.props.user._id);
                 }}
               >
                 <h4>
-                  <p>Old email: {this.props.user.email}</p>
+                  <p>Current email: {this.state.user.email}</p>
                 </h4>
-                new email:
-                <input
-                  style={{ width: "400px" }}
-                  type="text"
-                  value={this.state.currentEmail}
-                  onChange={this.updateInput}
-                  name="currentEmail"
-                />
+                <Form.Group as={Col} md="6">
+                  <Form.Label>New Email</Form.Label>
+                  <Form.Control
+                    name="currentEmail"
+                    type="email"
+                    value={this.state.currentEmail}
+                    onChange={this.updateInput}
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    Please provide a valid email.
+                  </Form.Control.Feedback>
+                </Form.Group>
                 <button
                   onClick={e => {
                     this.toggleEditEmail(e, this.props.user.email);
@@ -175,7 +165,7 @@ class Profile extends Component {
                   Cancel
                 </button>
                 <button onClick={this.editTheEmail}>Change email</button>
-              </form>
+              </Form>
             )}
             <ul>
               {this.showMyTrips()}
