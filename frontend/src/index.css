@@ -9,6 +9,13 @@ body {
   font-size: 10px;
 }
 
+.label {
+  position: relative;
+  left: 0px !important;
+  top: 5px !important;
+  cursor: pointer;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;

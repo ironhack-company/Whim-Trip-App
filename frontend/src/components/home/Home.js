@@ -3,6 +3,7 @@ import actions from "../../services/index";
 import { Button, Jumbotron, Container } from "react-bootstrap";
 import SignUp from "../auth/SignUp";
 
+
 class Home extends Component {
   state = {};
   handleChange = e => this.setState({ [e.target.name]: e.target.value });
@@ -24,8 +25,7 @@ class Home extends Component {
         <Container className="p-3">
           <h1 className="display-2">Hello, travelers!</h1>
           <p className="lead">
-            This is a simple hero unit, a simple jumbotron-style component for
-            calling extra attention to featured content or information.
+          Search cheap flights with at once to find the cheapest airline tickets for 2020
           </p>
           {/* <p>
             <Button variant="outline-primary">Log In</Button>

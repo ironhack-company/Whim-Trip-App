@@ -78,10 +78,11 @@ a:hover {
 .first-flight,
 .second-flight, 
 .leg {
+  border: 1px solid #00000012;
   margin: 0.5rem;
   padding: 0.5rem;
   width: 90%;
-  background: lightgray;
+  background: #007bff0d;
   border-radius: 5px;
   box-sizing: content-box;
-} d
+} 

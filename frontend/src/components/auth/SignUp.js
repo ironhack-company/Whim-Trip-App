@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from "react";
 import actions from "../../services/index";
 import { Link, Redirect } from "react-router-dom";
+import "./home.css";
+
 
 import { Button, Jumbotron, Container, Form, Col, Row } from "react-bootstrap";
 
@@ -66,6 +68,7 @@ class SignUp extends Component {
                 name="email"
                 type="email"
                 onChange={this.handleChange}
+                placeholder="Email"
               />
               <Form.Control.Feedback type="invalid">
                 Please provide a valid email.
@@ -78,6 +81,7 @@ class SignUp extends Component {
                 name="profileImg"
                 type="text"
                 onChange={this.handleChange}
+                placeholder="URL"
               />
             </Form.Group>
 
@@ -87,6 +91,7 @@ class SignUp extends Component {
                 name="username"
                 type="text"
                 onChange={this.handleChange}
+                placeholder="Username"
               />
             </Form.Group>
 
@@ -96,6 +101,7 @@ class SignUp extends Component {
                 name="password"
                 type="password"
                 onChange={this.handleChange}
+                placeholder="Password"
               />
 
               <Button

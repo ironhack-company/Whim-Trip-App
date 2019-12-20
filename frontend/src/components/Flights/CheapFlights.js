@@ -7,6 +7,8 @@ import airports from '../../data/airports';
 import "./CheapFlights.css";
 
 
+
+
 import 'react-dates/initialize';
 import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
 import { Link } from "react-router-dom";
@@ -180,8 +182,20 @@ export default class HotelSearch extends Component {
         //   <div className="leg">{i + 1} leg </div>
         //   <li>{this.findName(segment.flightSegment.departure.iataCode)}</li>
         // </ul>
-        <div class="leg"> {i + 1}
+        <div class="leg">
           <div class="flight-item">{this.findName(segment.flightSegment.departure.iataCode)}</div>
+          <div className="flight-item duration">
+            {segment.flightSegment.departure.at.slice(
+              0,
+              10
+            )}
+          </div>
+          <div className="flight-item duration">
+          {segment.flightSegment.departure.at.slice(
+                        11,
+                        16
+                      )} 
+          </div>
         </div>
       )
     })
@@ -192,6 +206,20 @@ export default class HotelSearch extends Component {
       return (
         <div className="leg">
           <div class="flight-item">{this.findName(segment.flightSegment.arrival.iataCode)}</div>
+          <div className="flight-item duration">
+            {segment.flightSegment.arrival.at.slice(
+              0,
+              10
+            )}
+          </div>
+          <div className="flight-item duration">
+          {segment.flightSegment.departure.at.slice(
+                        11,
+                        16
+                      )} 
+          </div>
+          {/* <div class="flight-item"> {(segment.flightSegment.arrival.at) } </div> */}
+
         </div>
       )
     })
@@ -222,19 +250,29 @@ export default class HotelSearch extends Component {
 
         <div className="flight-container flex-container rounded border border-light" >
           <div>
-            departure:  {this.showDepartureSegments(flight.offerItems[0].services[0].segments)}
+            <div className="flightIcon">
+              <img src={require('../../images/departure.png')} />
+            </div>
+            {this.showDepartureSegments(flight.offerItems[0].services[0].segments)}
 
           </div>
           <div>
-            arrival: {this.showArrivalSegments(flight.offerItems[0].services[0].segments)}
+
+            <div className="flightIcon">
+              <img src={require('../../images/arrival.png')} />
+            </div>
+
+
+            {this.showArrivalSegments(flight.offerItems[0].services[0].segments)}
           </div>
           <div>
             <div>
               <span>
-                ${flight.offerItems[0].price.total} + $ {flight.offerItems[0].price.totalTaxes} =
-            </span>
+                {/* ${flight.offerItems[0].price.total} + $ {flight.offerItems[0].price.totalTaxes} = */}
+              </span>
               <span className="total-price">
-                ${Number(flight.offerItems[0].price.total) + Number(flight.offerItems[0].price.totalTaxes)}{" "}
+                ${Number(flight.offerItems[0].price.total).toFixed(0)}
+
               </span>
             </div>
             <div>
@@ -248,7 +286,7 @@ export default class HotelSearch extends Component {
                     // destinationLocation: this.props.location.props
                     //   .destinationLocation
                   }}
-                >SELECT ></Link>
+                >SELECT</Link>
               </button>
             </div>
           </div>
@@ -317,20 +355,20 @@ export default class HotelSearch extends Component {
               </div>
 
               <DateRangePicker className='dateForm'
-              startDate={this.state.startDate} // momentPropTypes.momentObj or null,
-              startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
-              endDate={this.state.endDate} // momentPropTypes.momentObj or null,
-              endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
-              onDatesChange={({ startDate, endDate }) => this.setDate({ startDate, endDate })}//this.setState({ startDate, endDate })} // PropTypes.func.isRequired,
-              focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
-              onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
-            />
+                startDate={this.state.startDate} // momentPropTypes.momentObj or null,
+                startDateId="your_unique_start_date_id" // PropTypes.string.isRequired,
+                endDate={this.state.endDate} // momentPropTypes.momentObj or null,
+                endDateId="your_unique_end_date_id" // PropTypes.string.isRequired,
+                onDatesChange={({ startDate, endDate }) => this.setDate({ startDate, endDate })}//this.setState({ startDate, endDate })} // PropTypes.func.isRequired,
+                focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+                onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
+              />
 
               <div className="form-btn">
                 <button type="submit" className="submit-btn">Show flights
 							 </button>
 
-               {/* <input  value="Search cheap flights" /> */}
+                {/* <input  value="Search cheap flights" /> */}
 
 
               </div>
@@ -343,7 +381,7 @@ export default class HotelSearch extends Component {
 
 
 
-{/* 
+          {/* 
 
 
         </div>
