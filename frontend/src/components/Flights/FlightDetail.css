@@ -1,0 +1,19 @@
+.flight-item {
+  flex-grow: 1;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.flight-detail-message {
+  text-align: center;
+}
+
+.passenger-form {
+  width: 80%;
+  margin: 0 auto;
+  
+}
+
+.bg-opacity {
+  background-color: rgba(245, 245, 245, 0.5);
+}
