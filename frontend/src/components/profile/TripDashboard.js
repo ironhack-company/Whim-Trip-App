@@ -8,6 +8,7 @@ import moduleName from "module";
 import { Button, Form, Col } from "react-bootstrap";
 // import DayPickerInput from "react-day-picker/DayPickerInput";
 import "react-day-picker/lib/style.css";
+// import "TripDashboard.css"
 
 class TripDashboard extends Component {
   state = {
@@ -17,7 +18,8 @@ class TripDashboard extends Component {
     activeMarker: {},
     selectedPlace: {},
     destinationLocation: {lat:0, lng:0},
-    selectedPlacePhotos: []
+    selectedPlacePhotos: [],
+    itinerary: []
   };
 
   componentDidMount() {
@@ -34,7 +36,8 @@ class TripDashboard extends Component {
         console.log(res);
         await this.setState(
           {
-            bookingDetail: res.data
+            bookingDetail: res.data,
+            itinerary: res.data.itineraries
           },
           () => {
             let destinationAirportCode = this.state.bookingDetail.selectedFlight
@@ -169,73 +172,11 @@ class TripDashboard extends Component {
         })
     }
   }
-  
-
-    // render() {
-    //     console.log(this.props)
-    //     console.log(this.state)
-    //     // const { loading, userLocation } = this.state;
-    //     const { google } = this.props;
-    
-    //     // if (loading) {
-    //     //   return (
-    //     //     <Loader
-    //     //       type="Plane"
-    //     //       color="#00BFFF"
-    //     //       height={100}
-    //     //       width={100}
-    //     //       timeout={3000} //3 secs
-    //     //       className="loader"
-    //     //     />
-    //     //   );
-    //     //   //return null;
-    //     // } 
-    //     if (!this.state.tripDestination){
-    //         return (
-    //             <div>Loading</div>
-    //         )} else {
-    //             console.log(this.state.cityCoords.lat)
-    //         return (
-    //             <div>
-    //                 My Trip to {this.state.cityName}
-    //                 <div className="hotelMap">
-    
-    //                         <ins className="bookingaff" data-aid="1928826" 
-    //                                 data-target_aid="1928826" data-prod="map" 
-    //                                 data-width="100%" data-height="590" data-lang="ualng" 
-    //                                 data-dest_id="0" data-dest_type="landmark" 
-    //                                 data-latitude={this.state.cityCoords.lat} 
-    //                                 data-longitude={this.state.cityCoords.lng} data-mwhsb="1" 
-    //                                 data-zoom="12" >
-    //                                 <a href="//www.booking.com?aid=1928826">Booking.com</a>
-    //                             </ins>
-    //                             {/* <script src="//aff.bstatic.com/static/affiliate_base/js/flexiproduct.js"></script> */}
-    
-    //                </div>
-                    
-    //                 <div className="mapDiv col">
-    //                     <Map google={google} initialCenter={this.state.cityCoords} zoom={10}>
-    //                     <Marker onClick={this.onMarkerClick} name={"Current location"} />
-    //                     {this.getLocationData()}
-    //                     <InfoWindow
-    //                         marker={this.state.activeMarker}
-    //                         visible={this.state.showingInfoWindow}
-    //                     >
-    //                         <div>
-    //                         <h1>{this.state.selectedPlace.name}</h1>
-    //                         <h4>{this.state.selectedPlace.address}</h4>
-    //                         {/* <p>Rating: {this.state.selectedPlaceDetail.rating}</p> */}
-    //                         {/* {this.getPlacePhotos} */}
-    //                         {this.showPlacePhotos()}
-    //                         {/* <p>Open now: {this.state.selectedPlace.hours}</p> */}
-    //                         </div>
-    //                     </InfoWindow>
-    //                     </Map>
-    //                 </div>
                 
   handleChange = e => this.setState({ [e.target.name]: e.target.value });
 
   handleSubmit = e => {
+    
     console.log("handling submit");
     e.preventDefault();
     console.log(this.props);
@@ -243,13 +184,13 @@ class TripDashboard extends Component {
     console.log(copyUser);
     // copyUser.trips.push(this.state.selectedFlight);
     // let copySelectedFlights = this.state.selectedFlight;
-    this.setState(
-      {
-        user: copyUser
-        // selectedFlight: copySelectedFlights
-      },
-      () => {
-        console.log(this.state.user);
+    // this.setState(
+    //   {
+    //     user: copyUser
+    //     // selectedFlight: copySelectedFlights
+    //   },
+    //   () => {
+    //     console.log(this.state.user);
         axios
           //.post(`${baseUrl}/itinerary/${copyUser._id}`, this.state)
           .post(`${baseUrl}/itinerary/`, this.state, {
@@ -258,14 +199,35 @@ class TripDashboard extends Component {
 
           .then(data => {
             console.log(data, "yaaaa");
-            this.props.history.push(`/itinerary/${data.data._id}`);
+            // this.state.itinerary.push(data.data)
+            let itinerary = [...this.state.itinerary]
+            itinerary.push(data.data)
+            this.setState({itinerary}) //set itenerary to state
+            // this.props.history.push(`/itinerary/${data.data._id}`);
           })
           .catch(err => {
             console.log(err);
           });
       }
-    );
-  };
+    //);
+  //};
+
+  showItinerary = () => {
+      if (this.state.itinerary){
+          return this.state.itinerary.map(eachActivity => {
+              console.log(eachActivity)
+              return (
+                  <div>
+                      <h1>
+                          Day: {eachActivity.day}
+                      </h1>
+                      <h2>{eachActivity.activityName}</h2>
+                  </div>
+              )
+          })
+          
+      }
+  }
 
   render() {
     console.log(this.props);
@@ -324,6 +286,7 @@ class TripDashboard extends Component {
               Add to itinerary
             </Button>
           </form>
+         {this.showItinerary()}
           <div className="hotelMap">
     
                          <ins className="bookingaff" data-aid="1928826" 
