@@ -41,6 +41,8 @@ export default class FlightDetail extends Component {
     if (outboundFlight.segments.length > 1) {
       firstRender = (
         <>
+          <div className="flight-item">
+
           <li>
             From
             {outboundFlight.segments[1].flightSegment.departure.iataCode}
@@ -57,12 +59,16 @@ export default class FlightDetail extends Component {
             Duration
             {outboundFlight.segments[1].flightSegment.duration}
           </li>
+          </div>
+
         </>
       );
     }
     if (returnFlight.segments.length > 1) {
       secondRender = (
         <>
+              <div className="flight-item">
+
           <li>
             From
             {returnFlight.segments[1].flightSegment.departure.iataCode}
@@ -79,13 +85,140 @@ export default class FlightDetail extends Component {
             Duration
             {returnFlight.segments[1].flightSegment.duration}
           </li>
+          </div>
         </>
       );
     }
 
     return (
       <div>
-        <div className="border-bottom">
+
+
+<div
+            className="flight-container flex-container rounded border border-light"
+           
+          >
+            <div className="flight-schedule">
+              <p className="from-to">
+                Outbound{" "}
+                {outboundFlight.segments[0].flightSegment.operating.carrierCode}
+              </p>
+              <div className="outbound-container flex-container">
+                <div className="first-flight flex-container">
+                  <div className="flight-item">
+                    <li>
+                      {
+                        outboundFlight.segments[0].flightSegment.departure
+                          .iataCode
+                      }
+                    </li>
+                    <li>
+                      {outboundFlight.segments[0].flightSegment.departure.at.slice(
+                        0,
+                        10
+                      )}
+                    </li>
+                    <li>
+                      {outboundFlight.segments[0].flightSegment.departure.at.slice(
+                        11,
+                        16
+                      )}
+                    </li>
+                  </div>
+                  <div className="flight-item duration">
+                    {outboundFlight.segments[0].flightSegment.duration.slice(3)}
+                  </div>
+                  <div className="flight-item">
+                    <li>
+                      {
+                        outboundFlight.segments[0].flightSegment.arrival
+                          .iataCode
+                      }
+                    </li>
+                    <li>
+                      {outboundFlight.segments[0].flightSegment.arrival.at.slice(
+                        0,
+                        10
+                      )}
+                    </li>
+                    <li>
+                      {outboundFlight.segments[0].flightSegment.arrival.at.slice(
+                        11,
+                        16
+                      )} 
+                    </li>
+                  </div>
+                </div>
+                <div className="second-flight flex-container">
+                  {firstRender}
+                </div>
+              </div>
+              <p className="from-to">
+                Return{" "}
+                {returnFlight.segments[0].flightSegment.operating.carrierCode}
+              </p>
+              <div className="return-container flex-container">
+                <div className="first-flight flex-container">
+                  <div className="flight-item">
+                    <li>
+                      {
+                        returnFlight.segments[0].flightSegment.departure
+                          .iataCode
+                      }
+                    </li>
+                    <li>
+                      {returnFlight.segments[0].flightSegment.departure.at.slice(
+                        0,
+                        10
+                      )}
+                    </li>
+                    <li>
+                      {returnFlight.segments[0].flightSegment.departure.at.slice(
+                        11,
+                        16
+                      )}
+                    </li>
+                  </div>
+                  <div className="flight-item duration">
+                    {returnFlight.segments[0].flightSegment.duration.slice(3)}
+                    <div>
+                      <img src="../../images/plane-arrival-solid.svg" alt="" />
+                    </div>
+                  </div>
+                  <div className="flight-item">
+                    <li>
+                      {returnFlight.segments[0].flightSegment.arrival.iataCode}
+                    </li>
+                    <li>
+                      {returnFlight.segments[0].flightSegment.arrival.at.slice(
+                        0,
+                        10
+                      )}
+                    </li>
+                    <li>
+                      {returnFlight.segments[0].flightSegment.arrival.at.slice(
+                        11,
+                        16
+                      )}
+                    </li>
+                  </div>
+                </div>
+                <div className="second-flight flex-container">
+                  {secondRender}
+                </div>
+              </div>
+              {console.log(returnFlight.segments, returnFlight.segments.length)}
+            </div>
+
+           
+          </div>
+
+
+
+
+
+
+        {/* <div className="border-bottom">
           <li>Price {selectedFlight.price.total} </li>
           <li>Tax {selectedFlight.price.totalTaxes} </li>
           <li>
@@ -141,7 +274,7 @@ export default class FlightDetail extends Component {
             {returnFlight.segments[0].flightSegment.duration}
           </li>
           {secondRender}
-        </div>
+        </div> */}
       </div>
     );
   };

@@ -1,0 +1,6 @@
+.label {
+    position: relative;
+    left: 0px !important;
+    top: 5px !important;
+    cursor: pointer;
+  }

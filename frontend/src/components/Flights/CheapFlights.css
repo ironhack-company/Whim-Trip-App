@@ -1,3 +1,63 @@
+.navbar {
+  -webkit-box-shadow: 0 8px 6px -6px #999;
+  -moz-box-shadow: 0 8px 6px -6px #999;
+  box-shadow: 0 6px 3px -6px #975
+
+  /* the rest of your styling */
+}
+
+.btn-orange {
+  width: 100% !important;
+}
+.total-price {
+  font-size: 2.2rem !important;
+  font-weight: bold;
+  color: green;
+}
+label{
+  left:unset;
+}
+.CalendarDay__selected_span {
+  background: #4fa3e3 !important;
+  border: 1px double #4fa3e3 !important;
+  color: #fff;
+}
+
+.CalendarDay__selected, .CalendarDay__selected:active, .CalendarDay__selected:hover {
+  background: #007bffd4 !important;
+  border: 1px double #007bff !important;
+  color: #fff;
+}
+
+.DayPickerKeyboardShortcuts_show__bottomRight::before {
+  border-top: 26px solid transparent;
+  border-right: 33px solid #4fa3e3 !important;
+  bottom: 0;
+  right: 0;
+}
+
+.DateInput_input__focused {
+  outline: 0;
+  background: #fff;
+  border: 0;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 2px solid #4fa3e3 !important;
+  border-left: 0;
+}
+
+img .flightIcon {
+  width: 24px;
+}
+.flightIcon {
+  width: 24px;
+}
+
+img {
+  width: 24px;
+}
+
+
 .select {
     box-sizing: border-box;
     width: 100%;
@@ -79,19 +139,20 @@
 }
 
 .booking-form .form-control {
-    
-    background-color: #fff;
-    height: 49px;
-    padding: 0px 30px;
-    padding-top: 14px;
-    color: #191a1e;
-    width: 100%;
-    border: 2px solid #dfe5e9;
-    font-size: 16px;
-    font-weight: 700;
-    box-shadow: none;
-    border-radius: 4px;
-    transition: 0.2s all;
+  margin-top: 23px;
+  background-color: #fff;
+  height: 49px;
+  /* padding: 0px 30px; */
+  padding-top: 14px;
+  color: #191a1e;
+  width: 280px;
+  max-width: 120%;
+  border: 2px solid #dfe5e9;
+  font-size: 16px;
+  font-weight: 700;
+  box-shadow: none;
+  border-radius: 4px;
+  transition: 0.2s all;
 }
 
 .booking-form .form-control::-webkit-input-placeholder {
@@ -143,8 +204,8 @@
 .booking-form .form-label {
     margin: 20px;
     position: absolute;
-    left: -20px;
-    top: -45px;
+    left: -19px;
+    top: -25px;
     font-weight: 700;
     text-transform: uppercase;
     line-height: 24px;

@@ -208,7 +208,7 @@ export default class CheckPrices extends Component {
                       {outboundFlight.segments[0].flightSegment.arrival.at.slice(
                         11,
                         16
-                      )}
+                      )} 
                     </li>
                   </div>
                 </div>

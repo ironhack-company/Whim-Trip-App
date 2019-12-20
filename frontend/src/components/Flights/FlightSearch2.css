@@ -52,6 +52,13 @@ background-image: url("https://www.transparenttextures.com/patterns/foggy-birds.
     width: 65%;
   }
   
+
+
+  .price {
+    font-weight: bold;
+    color: green;
+  }
+
   .select {
     box-sizing: border-box;
     width: 30%;
@@ -235,7 +242,7 @@ background-image: url("https://www.transparenttextures.com/patterns/foggy-birds.
     /* padding-top: 28px; */
     position: relative;
     left: 104px;
-    bottom: 67px;
+    bottom: 30px;
     /* top: 15px; */
     /* bottom: 19px; */
   }

@@ -28,8 +28,7 @@ class LogIn extends Component {
         <Container className="p-3">
           <h1 className="display-2">Hello, travelers!</h1>
           <p className="lead">
-            This is a simple hero unit, a simple jumbotron-style component for
-            calling extra attention to featured content or information.
+          Search cheap flights with at once to find the cheapest airline tickets for 2020!
           </p>
           {/* <p>
           <Button variant="outline-primary">Log In</Button>

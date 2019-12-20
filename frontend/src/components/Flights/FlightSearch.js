@@ -211,6 +211,7 @@ export class FlightSearch extends Component {
           <div className="flight flex" key={index}>
             {/* <h1>{this.showDestination()}</h1> */}
             <div className="flight-buy">
+            <h4 className="price"> ${flight.price.total} </h4>
               <button>
                 {destinationCity._geoloc && (
                   <Link
@@ -245,10 +246,10 @@ export class FlightSearch extends Component {
                   </Link>
                 )}
               </button>
-              <button onClick={e => this.saveFlight(e, flight)}>
+              {/* <button onClick={e => this.saveFlight(e, flight)}>
                 Save this flight
-              </button>
-              <p>{flight.price.total} USD</p>
+              </button> */}
+          
             </div>
             <div className="flight-info flex">
               <div>
