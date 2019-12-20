@@ -7,6 +7,7 @@ const bookSchema = new Schema({
   lastName: String,
   country: String,
   phoneNumber: String,
+  itineraries:Object,
   gender: String,
   dateOfBirth: String,
   selectedFlight: Object,

@@ -96,13 +96,16 @@ router.post("/add-flight/:id", (req, res, next) => {
 
 router.get("/getBooking/:id", (req, res, next) => {
   let id = req.params.id;
+  console.log('id ',id)
   Booking.findById(id)
     .then(response => {
       console.log(response, "=========uouououououou===========");
       Itinerary.find({
         bookingId: id
       }).then(itineraries => {
+        console.log('itineraries',itineraries)
         response.itineraries = itineraries;
+        console.log(response)
         res.json(response);
       });
     })
