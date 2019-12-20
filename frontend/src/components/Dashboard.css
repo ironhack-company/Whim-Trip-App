@@ -1,0 +1,18 @@
+.dashboard-message {
+  text-align: center;
+}
+
+.dashboard-container {
+  padding: 2rem;
+}
+
+.card-body {
+  background-image: url(../images/travel1.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.card-title{
+    color:white;
+    font-size:1.8rem;
+}
