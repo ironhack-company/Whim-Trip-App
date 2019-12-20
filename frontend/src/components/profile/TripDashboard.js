@@ -6,6 +6,8 @@ import baseUrl from "../../services/configUrl";
 import airports from "../../data/airports";
 import moduleName from "module";
 import { Button, Form, Col } from "react-bootstrap";
+import DayPickerInput from "react-day-picker/DayPickerInput";
+import "react-day-picker/lib/style.css";
 
 class TripDashboard extends Component {
   state = {
@@ -113,10 +115,14 @@ class TripDashboard extends Component {
       () => {
         console.log(this.state.user);
         axios
-          .post(`${baseUrl}/add-flight/${copyUser._id}`, this.state)
+          //.post(`${baseUrl}/itinerary/${copyUser._id}`, this.state)
+          .post(`${baseUrl}/itinerary/`, this.state, {
+            withCredentials: true
+          })
+
           .then(data => {
             console.log(data, "yaaaa");
-            this.props.history.push(`/dashboard/${data.data._id}`);
+            this.props.history.push(`/itinerary/${data.data._id}`);
           })
           .catch(err => {
             console.log(err);
@@ -152,56 +158,21 @@ class TripDashboard extends Component {
       return (
         <div>
           My Trip to {this.state.cityName}
-          <h2></h2>
+          <h2>My itinerary</h2>
+          
+          <h2>Make itinerary</h2>
           <form onSubmit={this.handleSubmit}>
             <Form.Group as={Col} md="6">
-              <Form.Label>First Name:</Form.Label>
+              <Form.Label>Day</Form.Label>
               <Form.Control
-                name="firstName"
+                name="day"
                 type="text"
                 onChange={this.handleChange}
+                stakeholder="1"
               />
-              <Form.Label>Middle Name:</Form.Label>
+              <Form.Label>Activity name</Form.Label>
               <Form.Control
-                name="middleName"
-                type="text"
-                onChange={this.handleChange}
-              />
-              <Form.Label>Last Name:</Form.Label>
-              <Form.Control
-                name="lastName"
-                type="text"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group as={Col} md="6">
-              <Form.Label>Country:</Form.Label>
-              <Form.Control
-                name="country"
-                type="text"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group as={Col} md="6">
-              <Form.Label>Phone number:</Form.Label>
-              <Form.Control
-                name="phoneNumber"
-                type="text"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group as={Col} md="6">
-              <Form.Label>Gender:</Form.Label>
-              <Form.Control
-                name="gender"
-                type="text"
-                onChange={this.handleChange}
-              />
-            </Form.Group>
-            <Form.Group as={Col} md="6">
-              <Form.Label>Date of birth:</Form.Label>
-              <Form.Control
-                name="dateOfBirth"
+                name="activityName"
                 type="text"
                 onChange={this.handleChange}
               />
@@ -214,7 +185,7 @@ class TripDashboard extends Component {
               variant="primary"
               onClick={e => this.handleSubmit(e, this.state.selectedFlight)}
             >
-              Book this flight
+              Add to itinerary
             </Button>
           </form>
           <div className="hotelMap">
