@@ -19,7 +19,9 @@
   },
   "homepage": "https://github.com/ironhack-company/final-project-backend#readme",
   "dependencies": {
+    "iplocation": "^6.1.0",
     "moment": "^2.24.0",
+    "public-ip": "^4.0.0",
     "react-dates": "^21.5.1"
   }
 }
