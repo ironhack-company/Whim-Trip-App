@@ -14,15 +14,28 @@ class TripDashboard extends Component {
         showingInfoWindow: false,
         activeMarker: {},
         selectedPlace: {},
-        destinationLocation: {lat:0, lng:0}
+        destinationLocation: {lat:0, lng:0},
+        selectedPlacePhotos: []
     }
 
+    // getBookingMap = () => {
+    //     axios.get(`https://cors-anywhere.herokuapp.com/https://www.booking.com/markers_on_map?aid=1928826&aid=1928826&sid=838966a19d3a100d913be6184691289c&dest_id=0&dest_type=&sr_id=&ref=flexiproduct&limit=&stype=1&lang=en-us&ssm=1&ngp=1&sr_countrycode=&sr_lat=&sr_long=&srh=&checkin=2019-12-19&checkout=2019-12-20&guests=2&img_size=270x200&ns=1&spr=1&u=1&avl=1&tp=1&nor=1&spc=1&mdimb=1&currency=USD&rmd=1&room1=A,A;BBOX=-90.40085026562497,29.9133707093533,-90.11520573437497,30.0733428396658`)
+    //         .then(res => console.log(res))
+    // }
+
+
  componentDidMount(){
+     //this.getBookingMap()
+     //axios.get("www.booking.com?aid=1928826")
+    //window.open("https://www.booking.com?aid=1928826")
     const script = document.createElement("script")
     script.src = '//aff.bstatic.com/static/affiliate_base/js/flexiproduct.js';
     script.async = true;
-    console.log(this.props)
+    console.log(script, 'popopop')
     document.body.appendChild(script)
+
+
+    
     axios.get(`${baseUrl}/getBooking/${this.props.match.params.id}`, {withCredentials:true}).then(async res=>{
         console.log(res)
        await this.setState({
@@ -66,7 +79,6 @@ class TripDashboard extends Component {
       
     if (this.state.attractions) {
       return this.state.attractions.map((eachAttraction, i) => {
-          console.log(eachAttraction)
             return (
               <Marker
                 title={eachAttraction.name}
@@ -90,18 +102,22 @@ class TripDashboard extends Component {
     
     }
   };
-
+  
   onClickOnMarker = (props, marker, e) => {
-    this.setState({
-      selectedPlace: props,
-      activeMarker: marker,
-      showingInfoWindow: true,
-      clicked: true,
-    });
-    axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyC_Ryd8LuP-hChe7SPdvM_naB5ofhdF2QQ&placeid=${this.state.selectedPlace.place_id}`).then(response =>{
-        console.log(response)
-    })
-    // console.log(this.state.selectedPlace);
+      this.setState({
+          selectedPlace: props,
+          activeMarker: marker,
+          showingInfoWindow: true,
+          clicked: true,
+        });
+        axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyC_Ryd8LuP-hChe7SPdvM_naB5ofhdF2QQ&placeid=${this.state.selectedPlace.place_id}`).then(response =>{
+            console.log(response.data.result)
+            this.setState({
+                selectedPlaceDetail: response.data.result
+            })
+            this.getPlacePhotos()
+        })
+        // console.log(this.state.selectedPlace);
     //    let link = `https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyC_Ryd8LuP-hChe7SPdvM_naB5ofhdF2QQ&placeid=${this.state.selectedPlace.place_id}`
     //    console.log(link)
     //    axios.post(`${baseUrl}/getmystuff`, {link:link}).then(response => {
@@ -109,11 +125,59 @@ class TripDashboard extends Component {
 //    })
   };
 
+  getPlacePhotos = () => {
+
+      if (this.state.selectedPlaceDetail){
+        var urls = []
+        let promises = [] 
+        this.state.selectedPlaceDetail.photos.map(eachPhoto =>{
+              console.log(eachPhoto.photo_reference)
+             let picID = eachPhoto.photo_reference
+            promises.push(
+                axios.get(`https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=${picID}&key=AIzaSyC_Ryd8LuP-hChe7SPdvM_naB5ofhdF2QQ`)
+                .then(response => {
+                    let photoData = response.headers
+                    console.log(photoData)
+                    console.log(photoData['x-final-url'])
+                    let url = photoData['x-final-url']
+                    console.log(url)
+                        // this.state.selectedPlacePhotos.push(url)
+                        // let selectedPlacePhotos = [...this.state.selectedPlacePhotos]
+                        // selectedPlacePhotos.push(url)
+                        //urls.push(url)
+                        return url
+                })
+            )
+        })
+
+        Promise.all(promises).then(urls=>{
+            console.log(urls)
+            this.setState({
+                selectedPlacePhotos:urls
+            })
+        })
+    
+
+    }
+
+
+}
+
+  showPlacePhotos = () => {
+    if (this.state.selectedPlacePhotos.length > 0){
+        console.log(this.state.selectedPlace)
+        return this.state.selectedPlacePhotos.map(eachPhoto => {
+            return (
+                <img src={eachPhoto}></img>
+            )
+        })
+    }
+  }
+  
 
     render() {
         console.log(this.props)
         console.log(this.state)
-  
         // const { loading, userLocation } = this.state;
         const { google } = this.props;
     
@@ -148,7 +212,8 @@ class TripDashboard extends Component {
                                     data-longitude={this.state.cityCoords.lng} data-mwhsb="1" 
                                     data-zoom="12" >
                                     <a href="//www.booking.com?aid=1928826">Booking.com</a>
-                            </ins>
+                                </ins>
+                                {/* <script src="//aff.bstatic.com/static/affiliate_base/js/flexiproduct.js"></script> */}
     
                    </div>
                     
@@ -163,6 +228,9 @@ class TripDashboard extends Component {
                             <div>
                             <h1>{this.state.selectedPlace.name}</h1>
                             <h4>{this.state.selectedPlace.address}</h4>
+                            {/* <p>Rating: {this.state.selectedPlaceDetail.rating}</p> */}
+                            {/* {this.getPlacePhotos} */}
+                            {this.showPlacePhotos()}
                             {/* <p>Open now: {this.state.selectedPlace.hours}</p> */}
                             </div>
                         </InfoWindow>
@@ -179,3 +247,5 @@ class TripDashboard extends Component {
 export default GoogleApiWrapper({
     apiKey: "AIzaSyC_Ryd8LuP-hChe7SPdvM_naB5ofhdF2QQ"
   })(TripDashboard);
+
+  //https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=CmRaAAAAPuKX9G6PiHHsHz7XtcZ3whXztxa7WxIoLICeowtqU7IeVLsmECpoAc4BNeqxiVbu5NxnvF-G2osSoYlHeuW1g8PM0kcQ8VEDe6yBeyPyY4AFeZNiih59Bf7u8stkLXVEEhCcj5H4uy6zeAYyWlQxn-5KGhQCaRrSoMcy7c0w_FnYmuEyz51iyA&key=AIzaSyC_Ryd8LuP-hChe7SPdvM_naB5ofhdF2QQ
