@@ -1,22 +1,13 @@
-
-
 import React, { Component } from 'react'
 import axios from 'axios'
 import airports from '../../data/airports';
 // import "./FlightSearch2.css";
 import "./CheapFlights.css";
-
-
-
-
 import 'react-dates/initialize';
 import { DateRangePicker, SingleDatePicker, DayPickerRangeController } from 'react-dates';
 import { Link } from "react-router-dom";
-
 import 'react-dates/lib/css/_datepicker.css';
 import moment from 'moment'
-
-
 
 Date.prototype.addDays = function (days) {
   var date = new Date(this.valueOf());
@@ -24,18 +15,12 @@ Date.prototype.addDays = function (days) {
   return date;
 }
 
-
-
 var date = new Date();
 
 let d = date.addDays(7)
 console.log(date, d)
 
-
-
 export default class HotelSearch extends Component {
-
-
   state = {
     selectedFlight: null,
     searchQuery: "",
@@ -47,13 +32,9 @@ export default class HotelSearch extends Component {
     cityFrom: [],
     startDate: moment(),
     endDate: moment().add(3, 'days'),
-
   };
 
   componentDidMount() {
-
-
-
     navigator.geolocation.getCurrentPosition(
       position => {
         const { latitude, longitude } = position.coords;
@@ -71,15 +52,12 @@ export default class HotelSearch extends Component {
 
 
   getFlights = () => {
-
-
     // IATA to City Name
     let cityFrom = this.state.searchQuery
     let cityTo = this.state.searchTo
     let endDate = this.state.endDate.format('YYYY-MM-DD')
     let startDate = this.state.startDate.format('YYYY-MM-DD')
     console.log(endDate, startDate)
-
 
     let airportFrom = airports.find(airport => {
       return (airport.city == cityFrom || airport.city.toLowerCase() == cityFrom || airport.iata_code == cityFrom) // airport.state == cityFrom ||
@@ -291,13 +269,6 @@ export default class HotelSearch extends Component {
             </div>
           </div>
         </div>
-
-
-
-
-
-
-
       );
 
       {/* <h4>OutBound</h4>
