@@ -59,6 +59,7 @@ export default class CheckPrices extends Component {
     if (this.state.flightData) {
       console.log(this.state.flightData);
       let sorted = this.state.flightData.sort(function(a, b) {
+        console.log(a)
         return a.offerItems[0].price.total - b.offerItems[0].price.total;
       });
       console.log(sorted);
